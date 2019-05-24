@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="Python">
+  <head>
+    <meta charset="utf-8" />
+    <title>gaga package &#8212; gaga 0.1.0 documentation</title>
+    <link rel="stylesheet" href="static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <script type="text/javascript" src="static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">gaga 0.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gaga-package">
+<h1>gaga package<a class="headerlink" href="#gaga-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-gaga.GA">
+<span id="gaga-ga-module"></span><h2>gaga.GA module<a class="headerlink" href="#module-gaga.GA" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gaga.GA.ga">
+<em class="property">class </em><code class="descclassname">gaga.GA.</code><code class="descname">ga</code><span class="sig-paren">(</span><em>genes</em>, <em>evaluate</em>, <em>results_folder='results'</em>, <em>problem_type='minimise'</em>, <em>population_size=100</em>, <em>clone=1</em>, <em>mutate=0.3</em>, <em>selection='tournament'</em>, <em>crossover='multiUniform'</em>, <em>mutation='gaussian'</em>, <em>sigma=0.1</em>, <em>winrate=0.7</em>, <em>epoch=100</em>, <em>verbose=False</em>, <em>mutate_crossover=False</em>, <em>cross_scale=0.01</em>, <em>speciate=False</em>, <em>logspaced=[]</em>, <em>load=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="gaga.GA.ga.CLONE">
+<code class="descname">CLONE</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga.CLONE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.GA.ga.GaussianMutation">
+<code class="descname">GaussianMutation</code><span class="sig-paren">(</span><em>replace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga.GaussianMutation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.GA.ga.REFRESH">
+<code class="descname">REFRESH</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga.REFRESH" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refreshes the world after each epoch</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gaga.GA.ga.arithmetic">
+<code class="descname">arithmetic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga.arithmetic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.GA.ga.info">
+<code class="descname">info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience function to print out simulation settings</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gaga.GA.ga.init_population">
+<code class="descname">init_population</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga.init_population" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an initial population within the specified bounds</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gaga.GA.ga.measure_diversity">
+<code class="descname">measure_diversity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga.measure_diversity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.GA.ga.multiUniform">
+<code class="descname">multiUniform</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga.multiUniform" title="Permalink to this definition">¶</a></dt>
+<dd><p>This creates 1 child using the mask. The mask created is uniformly and randomly chosen.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gaga.GA.ga.multiUniformBrood">
+<code class="descname">multiUniformBrood</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga.multiUniformBrood" title="Permalink to this definition">¶</a></dt>
+<dd><p>This creates 2 children using the mask and the inverse mask. We then take the best child. The mask created is uniformly and randomly chosen.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gaga.GA.ga.order_gene_pool">
+<code class="descname">order_gene_pool</code><span class="sig-paren">(</span><em>epoch</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga.order_gene_pool" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.GA.ga.print_ind">
+<code class="descname">print_ind</code><span class="sig-paren">(</span><em>list_ind</em>, <em>dp='.4f'</em>, <em>title=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga.print_ind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convenience function. Pass in a list of individuals and it will print out the chromosomes and the fitness score</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gaga.GA.ga.randomMutation">
+<code class="descname">randomMutation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga.randomMutation" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the random mutation function described in Tang, Tseng, 2012</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gaga.GA.ga.random_sample_logspace">
+<code class="descname">random_sample_logspace</code><span class="sig-paren">(</span><em>start</em>, <em>end</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga.random_sample_logspace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.GA.ga.rouletteWheel">
+<code class="descname">rouletteWheel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga.rouletteWheel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.GA.ga.run_simulation">
+<code class="descname">run_simulation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga.run_simulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forced to actually run a simulation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gaga.GA.ga.save_results">
+<code class="descname">save_results</code><span class="sig-paren">(</span><em>epoch</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga.save_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>save results at each epoch</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gaga.GA.ga.tournament">
+<code class="descname">tournament</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga.tournament" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tournament selection. Two individuals are selected to enter into the tournament.
+The individual with the higher fitness score has a winRate chance of winning the tournament, while the individual with the lower fitness score has a (1 - winRate) chance of winning tournament. The tournament winner goes into the gene pool</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gaga.GA.ga.tune_hyper_parameters">
+<code class="descname">tune_hyper_parameters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.GA.ga.tune_hyper_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tune the hyper-parameters based on the diversity of the population</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gaga.Individual">
+<span id="gaga-individual-module"></span><h2>gaga.Individual module<a class="headerlink" href="#module-gaga.Individual" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gaga.Individual.Individual">
+<em class="property">class </em><code class="descclassname">gaga.Individual.</code><code class="descname">Individual</code><span class="sig-paren">(</span><em>chromosome</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Individual.Individual" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-gaga.Results">
+<span id="gaga-results-module"></span><h2>gaga.Results module<a class="headerlink" href="#module-gaga.Results" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gaga.Results.Results">
+<em class="property">class </em><code class="descclassname">gaga.Results.</code><code class="descname">Results</code><a class="headerlink" href="#gaga.Results.Results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="gaga.Results.Results.animate">
+<code class="descname">animate</code><span class="sig-paren">(</span><em>x_gene</em>, <em>y_gene</em>, <em>s=5</em>, <em>alpha=0.5</em>, <em>fps=30</em>, <em>log_scale=False</em>, <em>fmin=None</em>, <em>fmax=None</em>, <em>cmap=&lt;matplotlib.colors.LinearSegmentedColormap object&gt;</em>, <em>optimum=[]</em>, <em>inset=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.animate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.create_fitness_df">
+<code class="descname">create_fitness_df</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.create_fitness_df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.draw">
+<code class="descname">draw</code><span class="sig-paren">(</span><em>i</em>, <em>ax</em>, <em>x_gene</em>, <em>y_gene</em>, <em>s</em>, <em>alpha</em>, <em>cmap</em>, <em>fmin</em>, <em>fmax</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.draw" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.draw_inset">
+<code class="descname">draw_inset</code><span class="sig-paren">(</span><em>i</em>, <em>ax1</em>, <em>ax2</em>, <em>x_gene</em>, <em>y_gene</em>, <em>s</em>, <em>alpha</em>, <em>cmap</em>, <em>fmin</em>, <em>fmax</em>, <em>inset</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.draw_inset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.fitness_global_max">
+<code class="descname">fitness_global_max</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.fitness_global_max" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.fitness_global_min">
+<code class="descname">fitness_global_min</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.fitness_global_min" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.fitness_maxs">
+<code class="descname">fitness_maxs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.fitness_maxs" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the maximum fitness in each generation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.fitness_mins">
+<code class="descname">fitness_mins</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.fitness_mins" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the minimum fitness in each generation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.gene_global_max">
+<code class="descname">gene_global_max</code><span class="sig-paren">(</span><em>gene</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.gene_global_max" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.gene_global_min">
+<code class="descname">gene_global_min</code><span class="sig-paren">(</span><em>gene</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.gene_global_min" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.gene_maxs">
+<code class="descname">gene_maxs</code><span class="sig-paren">(</span><em>gene</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.gene_maxs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.gene_median">
+<code class="descname">gene_median</code><span class="sig-paren">(</span><em>gene</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.gene_median" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.gene_mins">
+<code class="descname">gene_mins</code><span class="sig-paren">(</span><em>gene</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.gene_mins" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.plot_2d">
+<code class="descname">plot_2d</code><span class="sig-paren">(</span><em>x_gene</em>, <em>y_gene</em>, <em>colormap=&lt;matplotlib.colors.LinearSegmentedColormap object&gt;</em>, <em>log_scale=False</em>, <em>scale=0.1</em>, <em>fmin=False</em>, <em>fmax=False</em>, <em>fps=30</em>, <em>inset=False</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.plot_2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>If reframe is True, the second plot will try to automatically zoom in during the animation.
+If reframe is false, the second image will be an automatic constant zoom showing 10% of the first image. You can change the zoom factor by changing scale</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.plot_2d_frame">
+<code class="descname">plot_2d_frame</code><span class="sig-paren">(</span><em>i</em>, <em>start</em>, <em>ax1</em>, <em>ax2</em>, <em>x_gene</em>, <em>y_gene</em>, <em>colormap</em>, <em>log_scale</em>, <em>fmin</em>, <em>fmax</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.plot_2d_frame" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.plot_2d_init">
+<code class="descname">plot_2d_init</code><span class="sig-paren">(</span><em>x_gene</em>, <em>y_gene</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.plot_2d_init" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.plot_3d">
+<code class="descname">plot_3d</code><span class="sig-paren">(</span><em>x_gene</em>, <em>y_gene</em>, <em>z_gene</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.plot_3d" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.plot_diversity">
+<code class="descname">plot_diversity</code><span class="sig-paren">(</span><em>gene=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.plot_diversity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.plot_fitness">
+<code class="descname">plot_fitness</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.plot_fitness" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gaga.Results.Results.print_best">
+<code class="descname">print_best</code><span class="sig-paren">(</span><em>minimise=True</em><span class="sig-paren">)</span><a class="headerlink" href="#gaga.Results.Results.print_best" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gaga">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-gaga" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="gaga.main">
+<code class="descclassname">gaga.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gaga.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">gaga package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-gaga.GA">gaga.GA module</a></li>
+<li><a class="reference internal" href="#module-gaga.Individual">gaga.Individual module</a></li>
+<li><a class="reference internal" href="#module-gaga.Results">gaga.Results module</a></li>
+<li><a class="reference internal" href="#module-gaga">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="sources/gaga.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">gaga 0.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Alison Wong.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="Python">
   <head>
     <meta charset="utf-8" />
-    <title>Getting Started &#8212; Genetic Algorithm  documentation</title>
+    <title>Getting Started &#8212; gaga 0.1.0 documentation</title>
     <link rel="stylesheet" href="static/nature.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
@@ -16,7 +16,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Demo: finding the minimum of Himmelblau&#39;s function" href="himmelblau.html" />
-    <link rel="prev" title="GAGA!" href="index.html" /> 
+    <link rel="prev" title="Welcome to gaga&#39;s documentation!" href="index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -25,12 +25,15 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="himmelblau.html" title="Demo: finding the minimum of Himmelblau&#39;s function"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="GAGA!"
+          <a href="index.html" title="Welcome to gaga&#39;s documentation!"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Genetic Algorithm  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">gaga 0.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -53,18 +56,67 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install gaga
 </pre></div>
 </div>
+</div>
+<div class="section" id="a-simple-demonstration-the-sphere-function">
+<h2>A simple demonstration: The sphere function<a class="headerlink" href="#a-simple-demonstration-the-sphere-function" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="https://en.wikipedia.org/wiki/File:Sphere_function_in_3D.pdf"><img alt="images/Sphere_function.jpg" class="align-center" src="images/Sphere_function.jpg" style="width: 45%;" /></a>
+<div class="math notranslate nohighlight">
+\[f(x, y) = \sum_{i - 1}^n x_i^2\]</div>
+<p>The sphere function is an simple optimisation test function because the gradient points toward the global minimum. The minimum is located at <span class="math notranslate nohighlight">\(f(0) = 0\)</span>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gaga</span> <span class="kn">as</span> <span class="nn">ga</span>
+</pre></div>
+</div>
+<p>Each individual in our population will have two genes, <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>. We will define these in the range <span class="math notranslate nohighlight">\(-1.5 &lt; x, y &lt; 1.5\)</span>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gene_definition</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">),</span>
+                   <span class="s1">&#39;y&#39;</span><span class="p">:(</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)}</span>
+</pre></div>
+</div>
+<p>We need to write a function that evaluates an individual and calculates it's fitness score from the objective function we are trying to minimise.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">individual</span><span class="p">):</span>
+
+    <span class="c1">#  unpack chromosome</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">individual</span><span class="o">.</span><span class="n">CHROMOSOME</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">individual</span><span class="o">.</span><span class="n">CHROMOSOME</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+
+    <span class="n">individual</span><span class="o">.</span><span class="n">FITNESS_SCORE</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="nb">pow</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We run the simulation by passing it the genes and the evaluate function we defined earlier. We will run our simulation with a population size of 50 and for 25 epochs.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">ga</span><span class="o">.</span><span class="n">ga</span><span class="p">(</span><span class="n">gene_definition</span><span class="p">,</span>
+            <span class="n">evaluate</span><span class="p">,</span>
+            <span class="n">epoch</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span>
+            <span class="n">population_size</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The following will display the gene values and the fitness score of the individual with the best fitness.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">print_best</span><span class="p">()</span>
+</pre></div>
+</div>
 <div class="line-block">
-<div class="line"><br /></div>
+<div class="line">x: -1.183347e-03</div>
+<div class="line">y: -9.174441e-04</div>
+<div class="line">fitness score: 2.242015e-06</div>
 </div>
+<p>We can also display the fitness of the best individual at each epoch.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">plot_fitness</span><span class="p">()</span>
+</pre></div>
 </div>
-<div class="section" id="demonstrations">
-<h2>Demonstrations<a class="headerlink" href="#demonstrations" title="Permalink to this headline">¶</a></h2>
+<a class="reference internal image-reference" href="images/sphere_fitness.png"><img alt="images/sphere_fitness.png" class="align-center" src="images/sphere_fitness.png" style="width: 45%;" /></a>
+<p>Finally, the following will generate an animation. We also specify the analytical minimum so that it is marked in the animation. By default, the animation is saved in a folder called <em>results</em>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">optimum</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="images/sphere.gif"><img alt="images/sphere.gif" class="align-center" src="images/sphere.gif" style="width: 45%;" /></a>
+</div>
+<div class="section" id="further-demonstrations">
+<h2>Further demonstrations<a class="headerlink" href="#further-demonstrations" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound" id="demos">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="himmelblau.html">Demo: finding the minimum of Himmelblau's function</a></li>
 </ul>
 </div>
-<p><a class="reference internal" href="index.html#mastertoc"><span class="std std-ref">Return Home</span></a></p>
+<p><span class="xref std std-ref">Return Home</span></p>
 </div>
 </div>
 
@@ -78,14 +130,15 @@
   <ul>
 <li><a class="reference internal" href="#">Getting Started</a><ul>
 <li><a class="reference internal" href="#downloading-gaga">Downloading gaga</a></li>
-<li><a class="reference internal" href="#demonstrations">Demonstrations</a></li>
+<li><a class="reference internal" href="#a-simple-demonstration-the-sphere-function">A simple demonstration: The sphere function</a></li>
+<li><a class="reference internal" href="#further-demonstrations">Further demonstrations</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
-                        title="previous chapter">GAGA!</a></p>
+                        title="previous chapter">Welcome to gaga's documentation!</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="himmelblau.html"
                         title="next chapter">Demo: finding the minimum of Himmelblau's function</a></p>
@@ -117,12 +170,15 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="himmelblau.html" title="Demo: finding the minimum of Himmelblau&#39;s function"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="GAGA!"
+          <a href="index.html" title="Welcome to gaga&#39;s documentation!"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Genetic Algorithm  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">gaga 0.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
