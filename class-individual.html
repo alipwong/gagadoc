@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="Python">
   <head>
     <meta charset="utf-8" />
-    <title>Demo: finding the minimum of Himmelblau&#39;s function &#8212; gaga 0.1.1 documentation</title>
+    <title>individual class &#8212; gaga 0.1.1 documentation</title>
     <link rel="stylesheet" href="static/nature.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
@@ -16,7 +16,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="results class" href="class-results.html" />
-    <link rel="prev" title="Getting Started" href="getstarted.html" /> 
+    <link rel="prev" title="ga class" href="class-ga.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -25,13 +25,15 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="class-results.html" title="results class"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="getstarted.html" title="Getting Started"
+          <a href="class-ga.html" title="ga class"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">gaga 0.1.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="getstarted.html" accesskey="U">Getting Started</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">gaga 0.1.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -40,33 +42,60 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="demo-finding-the-minimum-of-himmelblau-s-function">
-<h1>Demo: finding the minimum of Himmelblau's function<a class="headerlink" href="#demo-finding-the-minimum-of-himmelblau-s-function" title="Permalink to this headline">¶</a></h1>
-<div class="line-block">
-<div class="line"><br /></div>
+  <div class="section" id="module-Individual">
+<span id="individual-class"></span><h1>individual class<a class="headerlink" href="#module-Individual" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="Individual.Individual">
+<em class="property">class </em><code class="descclassname">Individual.</code><code class="descname">Individual</code><span class="sig-paren">(</span><em>genes</em><span class="sig-paren">)</span><a class="headerlink" href="#Individual.Individual" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class defines a single individual in the population</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>genes: dictionary</strong></p>
+<p>The dictionary is indexed by the gene name, and the corresponding value is the gene value.</p>
+<p>Example:</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 27%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"></th>
+<th class="head"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>gene</p></td>
+<td><p>x</p></td>
+<td><p>y</p></td>
+</tr>
+<tr class="row-odd"><td><p>value</p></td>
+<td><p>3.2</p></td>
+<td><p>1.7</p></td>
+</tr>
+</tbody>
+</table>
+<p>This gene would be represented as the following dictionary:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">genes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mf">1.7</span><span class="p">}</span>
+</pre></div>
 </div>
-<p>Himmelblau's function is defined as</p>
-<div class="math notranslate nohighlight">
-\[f(x,y) = (x^2 + y - 11)^2 + (x + y^2 - 7)^2\]</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>Himmelblau's function has four minima at which the function is 0. These minima are located at:</p>
-<div class="math notranslate nohighlight">
-\[(3, 2)\]</div>
-<div class="math notranslate nohighlight">
-\[(-2.805118, 3.131312)\]</div>
-<div class="math notranslate nohighlight">
-\[(-3.779310, -3.283186)\]</div>
-<div class="math notranslate nohighlight">
-\[(3.584428, -1.848126)\]</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<img alt="images/himmelblau.gif" class="align-center" src="images/himmelblau.gif" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
+</div></blockquote>
+</dd>
+<dt class="field-even">Attributes</dt>
+<dd class="field-even"><p><strong>fitness_score: float</strong></p>
+<blockquote>
+<div><p>The fitness is calculated from the genes by <code class="docutils literal notranslate"><span class="pre">evaluate()</span></code></p>
+</div></blockquote>
+<p><strong>data: dictionary</strong></p>
+<blockquote>
+<div><p>This is where you can store additional data. Assignment should be done in the <code class="docutils literal notranslate"><span class="pre">evaluate()</span></code> function passed to the ga class.</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 
@@ -76,15 +105,15 @@
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="getstarted.html"
-                        title="previous chapter">Getting Started</a></p>
+  <p class="topless"><a href="class-ga.html"
+                        title="previous chapter">ga class</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="class-results.html"
                         title="next chapter">results class</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="sources/himmelblau.rst.txt"
+      <li><a href="sources/class-individual.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -109,13 +138,15 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="class-results.html" title="results class"
              >next</a> |</li>
         <li class="right" >
-          <a href="getstarted.html" title="Getting Started"
+          <a href="class-ga.html" title="ga class"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">gaga 0.1.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="getstarted.html" >Getting Started</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">gaga 0.1.1 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

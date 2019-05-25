@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="Python">
+  <head>
+    <meta charset="utf-8" />
+    <title>ga class &#8212; gaga 0.1.1 documentation</title>
+    <link rel="stylesheet" href="static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <script type="text/javascript" src="static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="individual class" href="class-individual.html" />
+    <link rel="prev" title="Demo: finding the minimum of Himmelblau&#39;s function" href="himmelblau.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="class-individual.html" title="individual class"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="himmelblau.html" title="Demo: finding the minimum of Himmelblau&#39;s function"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">gaga 0.1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-GA">
+<span id="ga-class"></span><h1>ga class<a class="headerlink" href="#module-GA" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="GA.ga">
+<em class="property">class </em><code class="descclassname">GA.</code><code class="descname">ga</code><span class="sig-paren">(</span><em>gene_definition</em>, <em>evaluate</em>, <em>results_folder='results'</em>, <em>problem_type='minimise'</em>, <em>population_size=100</em>, <em>epoch=100</em>, <em>clone=1</em>, <em>mutate=0.3</em>, <em>selection='tournament'</em>, <em>crossover='multi_uniform'</em>, <em>mutation='gaussian'</em>, <em>sigma=0.1</em>, <em>winrate=0.7</em>, <em>verbose=False</em>, <em>mutate_crossover=False</em>, <em>cross_scale=0.01</em>, <em>speciate=False</em>, <em>logspaced=[]</em>, <em>load=False</em><span class="sig-paren">)</span><a class="headerlink" href="#GA.ga" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the genetic algorithm class.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>gene_definition: dictionary</strong></dt><dd><p>Defines the name of each gene and its initial bounds.</p>
+<p>Example:</p>
+<p><em>x</em>, <span class="math notranslate nohighlight">\(0&lt;x&lt;1\)</span></p>
+<p><em>y</em>, <span class="math notranslate nohighlight">\(0&lt;y&lt;2\)</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gene_definition</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)}</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p><strong>evaluate: function</strong></p>
+</dd>
+<dt class="field-even">Optional parameters</dt>
+<dd class="field-even"><dl>
+<dt><strong>results_folder: string, (default = 'results')</strong></dt><dd><p>Path to where all results files will be saved</p>
+</dd>
+<dt><strong>problem_type: string, (default = 'minimise')</strong></dt><dd><p>Specify whether the goal is to minimise or maximise the fitness score (i.e. the objective function)</p>
+</dd>
+<dt><strong>population_size: int, (default = 100)</strong></dt><dd><p>The number of individuals that make up the initial population. Also the number of individuals in each generation.</p>
+</dd>
+<dt><strong>epoch: int, (default = 100)</strong></dt><dd><p>The number of iterations the simulation runs for. i.e. the number of generations produced.</p>
+</dd>
+<dt><strong>clone: int, (default = 1)</strong></dt><dd><p>The number of the best individuals kept for each generation. By default, this clones the best individual of the current generation so that it will live in the next generation.</p>
+</dd>
+<dt><strong>mutate: int, float, (default = 0.3)</strong></dt><dd><p>The number of individuals in the next generation that will be created by mutating the current generation.</p>
+<ul>
+<li><p>if int, this will be the number of mutants</p></li>
+<li><p>if float, this will be the percentage of the population that will be mutants but rounded up.</p>
+<blockquote>
+<div><p>Example:</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">population_size</span> <span class="pre">=</span> <span class="pre">25</span></code> and <code class="docutils literal notranslate"><span class="pre">mutate</span> <span class="pre">=</span> <span class="pre">0.1</span></code> then in each generation, there will be 3 mutants.</p>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+<dt><strong>selection: string, (default = 'tournament')</strong></dt><dd><p>Specifies the method of selection. Choose from: 'tournament', 'roulette_wheel'.</p>
+<ul>
+<li><dl class="method">
+<dt id="GA.ga._ga__tournament">
+<code class="descname">_ga__tournament</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#GA.ga._ga__tournament" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tournament selection. Two individuals are selected to enter into the tournament.
+The individual with the higher fitness score has a win rate chance of winning the tournament, while the individual with the lower fitness score has a (1 - win rate) chance of winning tournament. The tournament winner goes into the gene pool</p>
+</dd></dl>
+
+</li>
+<li><dl class="method">
+<dt id="GA.ga._ga__roulette_wheel">
+<code class="descname">_ga__roulette_wheel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#GA.ga._ga__roulette_wheel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Individuals are selected by spinning a roulette wheel. Each slice on the wheel represents an individual. The area of the slice corresponds to their fitness score.</p>
+</dd></dl>
+
+</li>
+</ul>
+</dd>
+<dt><strong>winrate: float, (default = 0.7)</strong></dt><dd><p>Only used for <code class="docutils literal notranslate"><span class="pre">_ga__tournament()</span></code>.</p>
+<p>Specifies the probability that the individual with the better fitness score will 'win the tournament' and be selected for the gene pool.</p>
+</dd>
+<dt><strong>crossover: string, (default = 'multiUniform')</strong></dt><dd><p>Specifies the method of crossover. Choose from: 'multi_uniform', 'brood', 'arithmetic'</p>
+<ul>
+<li><dl class="method">
+<dt id="GA.ga._ga__multi_uniform">
+<code class="descname">_ga__multi_uniform</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#GA.ga._ga__multi_uniform" title="Permalink to this definition">¶</a></dt>
+<dd><p>This creates 1 child using the mask. The mask created is uniformly and randomly chosen.</p>
+</dd></dl>
+
+</li>
+<li><dl class="method">
+<dt id="GA.ga._ga__brood">
+<code class="descname">_ga__brood</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#GA.ga._ga__brood" title="Permalink to this definition">¶</a></dt>
+<dd><p>This creates 2 children using the mask and the inverse mask. We then take the best child. The mask created is uniformly and randomly chosen.</p>
+</dd></dl>
+
+</li>
+<li><dl class="method">
+<dt id="GA.ga._ga__arithmetic">
+<code class="descname">_ga__arithmetic</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#GA.ga._ga__arithmetic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</li>
+</ul>
+</dd>
+</dl>
+<p><strong>mutation: string, (default = 'gaussian')</strong></p>
+<p><strong>sigma float, (default = 0.1)</strong></p>
+<p><strong>verbose: boolean, (default = False)</strong></p>
+<dl>
+<dt><strong>mutate_crossover: boolean, (default = False)</strong></dt><dd><p>Specifies the method of mutation. Choose from: 'gaussian', 'random'</p>
+<ul>
+<li><dl class="method">
+<dt id="GA.ga._ga__gaussian_mutation">
+<code class="descname">_ga__gaussian_mutation</code><span class="sig-paren">(</span><em>replace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#GA.ga._ga__gaussian_mutation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</li>
+<li><dl class="method">
+<dt id="GA.ga._ga__random_mutation">
+<code class="descname">_ga__random_mutation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#GA.ga._ga__random_mutation" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is the random mutation function described in Tang, Tseng, 2012</p>
+</dd></dl>
+
+</li>
+</ul>
+</dd>
+</dl>
+<p><strong>speciate: boolean, (default = False)</strong></p>
+<p><strong>logspaced: list, (default = [])</strong></p>
+<p><strong>load: boolean (default = False)</strong></p>
+</dd>
+<dt class="field-odd">Methods</dt>
+<dd class="field-odd"><dl class="method">
+<dt id="GA.ga.info">
+<code class="descname">info</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#GA.ga.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will display simulation information</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="GA.ga.run_simulation">
+<code class="descname">run_simulation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#GA.ga.run_simulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forced to actually run a simulation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="GA.ga.measure_diversity">
+<code class="descname">measure_diversity</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#GA.ga.measure_diversity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd>
+</dl>
+<dl class="method">
+<dt>
+<code class="descname">info</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>This function will display simulation information</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">measure_diversity</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">run_simulation</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Forced to actually run a simulation</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="himmelblau.html"
+                        title="previous chapter">Demo: finding the minimum of Himmelblau's function</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="class-individual.html"
+                        title="next chapter">individual class</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="sources/class-ga.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="class-individual.html" title="individual class"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="himmelblau.html" title="Demo: finding the minimum of Himmelblau&#39;s function"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">gaga 0.1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Alison Wong.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

@@ -7,15 +7,22 @@ Welcome to gaga's documentation!
 ================================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 1
 
    getstarted
 
+Classes
+=======
+
+.. toctree::
+   :maxdepth: 1
+
+   class-ga
+   class-individual
+   class-results
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
