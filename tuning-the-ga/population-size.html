@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="Python">
+  <head>
+    <meta charset="utf-8" />
+    <title>Selecting a population size &#8212; gaga 0.1.1 documentation</title>
+    <link rel="stylesheet" href="../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <script type="text/javascript" src="../static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="results class" href="../class-results.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../class-results.html" title="results class"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="selecting-a-population-size">
+<h1>Selecting a population size<a class="headerlink" href="#selecting-a-population-size" title="Permalink to this headline">¶</a></h1>
+<p>The aim of this tutorial is to help you select a population size for your genetic algorithm. We will use Rosenbrock's banana function.</p>
+<p><span class="math notranslate nohighlight">\(f(x,y) = (a-x)^2 + b(y - x^2)^2\)</span></p>
+<p>For the constants <span class="math notranslate nohighlight">\(a = 1\)</span> and <span class="math notranslate nohighlight">\(b = 100\)</span>, the minimum is at <span class="math notranslate nohighlight">\(f(1,1) = 0\)</span>.</p>
+<a class="reference external image-reference" href="https://en.wikipedia.org/wiki/Rosenbrock_function"><img alt="../images/Rosenbrock_function.png" class="align-center" src="../images/Rosenbrock_function.png" /></a>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gaga</span> <span class="kn">as</span> <span class="nn">ga</span>
+
+<span class="n">genes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s1">&#39;y&#39;</span><span class="p">:(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)}</span>
+
+<span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">individual</span><span class="p">):</span>
+
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mi">100</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">individual</span><span class="o">.</span><span class="n">genes</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">individual</span><span class="o">.</span><span class="n">genes</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+
+    <span class="n">individual</span><span class="o">.</span><span class="n">fitness_score</span> <span class="o">=</span> <span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="section" id="a-small-population">
+<h2>A small population<a class="headerlink" href="#a-small-population" title="Permalink to this headline">¶</a></h2>
+<p>When the population size is small, the genetic algorithm is extremely sensitive to initial conditions.</p>
+<div class="section" id="low-exploration">
+<h3>Low exploration<a class="headerlink" href="#low-exploration" title="Permalink to this headline">¶</a></h3>
+<p>The problem with a small population is that the initial population might not start anywhere near the global optimum. If the mutation is low then the population may take a long time to discover the optimum or may never discover it at all.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">ga</span><span class="o">.</span><span class="n">ga</span><span class="p">(</span><span class="n">genes</span><span class="p">,</span> <span class="n">evaluate</span><span class="p">,</span> <span class="n">population_size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 34%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><img alt="../images/small_pop_low_exp_0.gif" src="../images/small_pop_low_exp_0.gif" />
+</td>
+<td><img alt="../images/small_pop_low_exp_1.gif" src="../images/small_pop_low_exp_1.gif" />
+</td>
+<td><img alt="../images/small_pop_low_exp_2.gif" src="../images/small_pop_low_exp_2.gif" />
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">seed</span> <span class="pre">=</span> <span class="pre">0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">seed</span> <span class="pre">=</span> <span class="pre">1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">seed</span> <span class="pre">=</span> <span class="pre">2</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="good-exploration">
+<h3>Good exploration<a class="headerlink" href="#good-exploration" title="Permalink to this headline">¶</a></h3>
+<p>For a small population size, you generally want large <code class="docutils literal notranslate"><span class="pre">mutate</span></code> and <code class="docutils literal notranslate"><span class="pre">sigma</span></code> to encourage exploration.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">ga</span><span class="o">.</span><span class="n">ga</span><span class="p">(</span><span class="n">genes</span><span class="p">,</span> <span class="n">evaluate</span><span class="p">,</span> <span class="n">mutate</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">population_size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><img alt="../images/small_pop_0.gif" src="../images/small_pop_0.gif" />
+</td>
+<td><img alt="../images/small_pop_1.gif" src="../images/small_pop_1.gif" />
+</td>
+<td><img alt="../images/small_pop_2.gif" src="../images/small_pop_2.gif" />
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">seed</span> <span class="pre">=</span> <span class="pre">0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">seed</span> <span class="pre">=</span> <span class="pre">1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">seed</span> <span class="pre">=</span> <span class="pre">2</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="a-large-population">
+<h2>A large population<a class="headerlink" href="#a-large-population" title="Permalink to this headline">¶</a></h2>
+<p>A large population can be computationally expensive. It is usually better to work with a smaller population.</p>
+<div class="section" id="low-selection">
+<h3>Low selection<a class="headerlink" href="#low-selection" title="Permalink to this headline">¶</a></h3>
+<p>A large population will sample the initial search space well making it less dependant to initial conditions and some of the initial population should begin near the optimum. However, the population will be diluted with bad genes and may result in the extinction of fitter individuals forcing the population to converge to a suboptimal solution. A large population is also very resilient and will be slow to move towards the optimum (see below <code class="docutils literal notranslate"><span class="pre">seed</span> <span class="pre">=</span> <span class="pre">2</span></code>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">ga</span><span class="o">.</span><span class="n">ga</span><span class="p">(</span><span class="n">genes</span><span class="p">,</span> <span class="n">evaluate</span><span class="p">,</span> <span class="n">population_size</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 34%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><img alt="../images/large_pop_low_sel_0.gif" src="../images/large_pop_low_sel_0.gif" />
+</td>
+<td><img alt="../images/large_pop_low_sel_1.gif" src="../images/large_pop_low_sel_1.gif" />
+</td>
+<td><img alt="../images/large_pop_low_sel_2.gif" src="../images/large_pop_low_sel_2.gif" />
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">seed</span> <span class="pre">=</span> <span class="pre">0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">seed</span> <span class="pre">=</span> <span class="pre">1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">seed</span> <span class="pre">=</span> <span class="pre">2</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="high-selection">
+<h3>High selection<a class="headerlink" href="#high-selection" title="Permalink to this headline">¶</a></h3>
+<p>It is usually good to increase the selection pressure for a large population because usually the bad/mediocre genes dominate the population.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">ga</span><span class="o">.</span><span class="n">ga</span><span class="p">(</span><span class="n">genes</span><span class="p">,</span> <span class="n">evaluate</span><span class="p">,</span> <span class="n">population_size</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">winrate</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">clone</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><img alt="../images/large_pop_0.gif" src="../images/large_pop_0.gif" />
+</td>
+<td><img alt="../images/large_pop_1.gif" src="../images/large_pop_1.gif" />
+</td>
+<td><img alt="../images/large_pop_2.gif" src="../images/large_pop_2.gif" />
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">seed</span> <span class="pre">=</span> <span class="pre">0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">seed</span> <span class="pre">=</span> <span class="pre">1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">seed</span> <span class="pre">=</span> <span class="pre">2</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Selecting a population size</a><ul>
+<li><a class="reference internal" href="#a-small-population">A small population</a><ul>
+<li><a class="reference internal" href="#low-exploration">Low exploration</a></li>
+<li><a class="reference internal" href="#good-exploration">Good exploration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#a-large-population">A large population</a><ul>
+<li><a class="reference internal" href="#low-selection">Low selection</a></li>
+<li><a class="reference internal" href="#high-selection">High selection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../class-results.html"
+                        title="previous chapter">results class</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../sources/tuning-the-ga/population-size.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../class-results.html" title="results class"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Alison Wong.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

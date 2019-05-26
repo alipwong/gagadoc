@@ -21,6 +21,14 @@ Classes
    class-individual
    class-results
 
+Tips for tuning your genetic algorithm
+======================================
+
+.. toctree::
+   :maxdepth: 1
+
+   tuning-the-ga/population-size
+
 Indices and tables
 ==================
 
