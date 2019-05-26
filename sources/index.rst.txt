@@ -3,6 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. _home:
+
 Welcome to gaga's documentation!
 ================================
 
@@ -10,6 +12,14 @@ Welcome to gaga's documentation!
    :maxdepth: 1
 
    getstarted
+
+A bit of theory
+===============
+
+.. toctree::
+   :maxdepth: 1
+
+   theory/selection
 
 Classes
 =======
@@ -20,6 +30,8 @@ Classes
    class-ga
    class-individual
    class-results
+
+
 
 Tips for tuning your genetic algorithm
 ======================================

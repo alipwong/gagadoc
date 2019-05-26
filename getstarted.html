@@ -25,6 +25,9 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="himmelblau.html" title="Demo: finding the minimum of Himmelblau&#39;s function"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -71,11 +74,11 @@
 <p>We need to write a function that evaluates an individual and calculates it's fitness score from the objective function we are trying to minimise.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">individual</span><span class="p">):</span>
 
-    <span class="c1">#  unpack chromosome</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">individual</span><span class="o">.</span><span class="n">CHROMOSOME</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">individual</span><span class="o">.</span><span class="n">CHROMOSOME</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+    <span class="c1">#  unpack genes</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">individual</span><span class="o">.</span><span class="n">genes</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">individual</span><span class="o">.</span><span class="n">genes</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
 
-    <span class="n">individual</span><span class="o">.</span><span class="n">FITNESS_SCORE</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="nb">pow</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">individual</span><span class="o">.</span><span class="n">fitness_score</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="nb">pow</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We run the simulation by passing it the genes and the evaluate function we defined earlier. We will run our simulation with a population size of 50 and for 25 epochs.</p>
@@ -113,7 +116,7 @@
 <li class="toctree-l1"><a class="reference internal" href="himmelblau.html">Demo: finding the minimum of Himmelblau's function</a></li>
 </ul>
 </div>
-<p><span class="xref std std-ref">Return Home</span></p>
+<p><a class="reference internal" href="index.html#home"><span class="std std-ref">Return Home</span></a></p>
 </div>
 </div>
 
@@ -166,6 +169,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
         <li class="right" >
           <a href="himmelblau.html" title="Demo: finding the minimum of Himmelblau&#39;s function"
              >next</a> |</li>

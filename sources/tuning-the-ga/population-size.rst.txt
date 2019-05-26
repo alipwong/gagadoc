@@ -1,5 +1,5 @@
-Selecting a population size
-===========================
+Population size
+===============
 
 The aim of this tutorial is to help you select a population size for your genetic algorithm. We will use Rosenbrock's banana function.
 
@@ -96,3 +96,5 @@ It is usually good to increase the selection pressure for a large population bec
 .. image:: ../static/tuning/pop_size/large_pop_0.gif  .. image:: ../static/tuning/pop_size/large_pop_1.gif  .. image:: ../static/tuning/pop_size/large_pop_2.gif
 ``seed = 0``                                           ``seed = 1``                                           ``seed = 2``
 =====================================================  =====================================================  =====================================================
+
+:ref:`Return Home <home>`

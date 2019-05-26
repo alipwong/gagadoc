@@ -1,0 +1,32 @@
+Selection
+=========
+
+The selection process aims to mimic natural selection where individuals that are unfit do not survive. In the selection stage, the fittest individuals selected to survive and enter into the gene pool where they will have the opportunity to reproduce. Selection schemes can be classified as a proportional selection where selection is proportional to the fitness score or ordinal selection if it depends on the rank of the fitness score
+
+When designing the selection mechanism *selection pressure* needs to be taken into account. The selection pressure describes the degree of bias towards fitter chromosomes. A high selection pressure highly favours the individuals with the best fitness score. While this may greatly improve the overall fitness of the following generation, the population is at risk of becoming homogenous and result in a poor exploration of the solution space. If however the selection pressure is too low, evolution can be quite slow.
+
+Tournament selection
+--------------------
+
+In tournament selection, *n* tournaments are hosted, and the winner of each tournament goes into the gene pool. For each tournament, 2 participants are chosen from the population and the individual with the better fitness score will win with probability ``win_rate`` otherwise the indiviual with the lower fitness score will win.
+
+.. code-block:: text
+
+    tournament(ind_1, ind_2, win_rate, gene_pool):
+        
+        if individual_1.fitness_score > individual_2.fitness_score:
+            rank_1 = individual_1
+            rank_2 = individual_2
+        else:
+            rank_1 = individual_2
+            rank_2 = individual_1
+        
+        r = randomly generated number
+
+        if r < win_rate:
+            gene_pool <- rank_1
+        else:
+            gene_pool <- rank_2
+
+
+and there is a specified win probability w which is the probability that the fitter individual will win. Starting with the individual of the highest rank, each individual will ‘win’ the tournament with probability w. Once there is a winner, the tournament is terminated and the winner is entered into the mating pool. If no one wins, the individual of lowest rank goes into the mating pool. Individuals can be entered into many tournaments but can only enter a given tournament once. The selection pressure can be changed by changing p or w

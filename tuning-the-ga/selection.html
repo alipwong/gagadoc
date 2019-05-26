@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="Python">
+  <head>
+    <meta charset="utf-8" />
+    <title>Selection &#8212; gaga 0.1.1 documentation</title>
+    <link rel="stylesheet" href="../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <script type="text/javascript" src="../static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Population size" href="population-size.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="population-size.html" title="Population size"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="selection">
+<h1>Selection<a class="headerlink" href="#selection" title="Permalink to this headline">¶</a></h1>
+<p>The selection process aims to mimic natural selection where individuals that are unfit do not survive. In the selection stage, the fittest individuals selected to survive and enter into the gene pool where they will have the opportunity to reproduce. Selection schemes can be classified as a proportional selection where selection is proportional to the fitness score or ordinal selection if it depends on the rank of the fitness score</p>
+<p>When designing the selection mechanism <em>selection pressure</em> needs to be taken into account. The selection pressure describes the degree of bias towards fitter chromosomes. A high selection pressure highly favours the individuals with the best fitness score. While this may greatly improve the overall fitness of the following generation, the population is at risk of becoming homogenous and result in a poor exploration of the solution space. If however the selection pressure is too low, evolution can be quite slow.</p>
+<div class="section" id="tournament-selection">
+<h2>Tournament selection<a class="headerlink" href="#tournament-selection" title="Permalink to this headline">¶</a></h2>
+<p>In tournament selection, <em>n</em> tournaments are hosted, and the winner of each tournament goes into the gene pool. For each tournament, 2 participants are chosen from the population and the individual with the better fitness score will win with probability <code class="docutils literal notranslate"><span class="pre">win_rate</span></code> otherwise the indiviual with the lower fitness score will win.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tournament(ind_1, ind_2, win_rate, gene_pool):
+
+    if individual_1.fitness_score &gt; individual_2.fitness_score:
+        rank_1 = individual_1
+        rank_2 = individual_2
+    else:
+        rank_1 = individual_2
+        rank_2 = individual_1
+
+    r = randomly generated number
+
+    if r &lt; win_rate:
+        gene_pool &lt;- rank_1
+    else:
+        gene_pool &lt;- rank_2
+</pre></div>
+</div>
+<p>and there is a specified win probability w which is the probability that the fitter individual will win. Starting with the individual of the highest rank, each individual will ‘win’ the tournament with probability w. Once there is a winner, the tournament is terminated and the winner is entered into the mating pool. If no one wins, the individual of lowest rank goes into the mating pool. Individuals can be entered into many tournaments but can only enter a given tournament once. The selection pressure can be changed by changing p or w</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Selection</a><ul>
+<li><a class="reference internal" href="#tournament-selection">Tournament selection</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="population-size.html"
+                        title="previous chapter">Population size</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../sources/tuning-the-ga/selection.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="population-size.html" title="Population size"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Alison Wong.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

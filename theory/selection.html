@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="Python">
+  <head>
+    <meta charset="utf-8" />
+    <title>Selection &#8212; gaga 0.1.1 documentation</title>
+    <link rel="stylesheet" href="../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <script type="text/javascript" src="../static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ga class" href="../class-ga.html" />
+    <link rel="prev" title="Demo: finding the minimum of Himmelblau&#39;s function" href="../himmelblau.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../class-ga.html" title="ga class"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../himmelblau.html" title="Demo: finding the minimum of Himmelblau&#39;s function"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="selection">
+<span id="selection-theory"></span><h1>Selection<a class="headerlink" href="#selection" title="Permalink to this headline">¶</a></h1>
+<p>The selection process aims to mimic natural selection where individuals that are unfit do not survive. In the selection stage, the fittest individuals selected to survive and enter into the gene pool where they will have the opportunity to reproduce. Selection schemes can be classified as a proportional selection where selection is proportional to the fitness score or ordinal selection if it depends on the rank of the fitness score</p>
+<p>When designing the selection mechanism <em>selection pressure</em> needs to be taken into account. The selection pressure describes the degree of bias towards fitter chromosomes. A high selection pressure highly favours the individuals with the best fitness score. While this may greatly improve the overall fitness of the following generation, the population is at risk of becoming homogenous and result in a poor exploration of the solution space. If however the selection pressure is too low, evolution can be quite slow.</p>
+<div class="section" id="tournament-selection">
+<h2>Tournament selection<a class="headerlink" href="#tournament-selection" title="Permalink to this headline">¶</a></h2>
+<p>In tournament selection, <em>n</em> tournaments are hosted, and the winner of each tournament goes into the gene pool. For each tournament, 2 participants are chosen from the population and the individual with the better fitness score will win with probability <code class="docutils literal notranslate"><span class="pre">win_rate</span></code> otherwise the indiviual with the lower fitness score will win. You can change the selection pressure by adjusting <code class="docutils literal notranslate"><span class="pre">win_rate</span></code>. Tournament selection is a type of <em>ordinal</em> selection method as it is based on the rank of an individual's fitness score.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>tournament(ind_1, ind_2, win_rate, gene_pool):
+
+    if individual_1.fitness_score &gt; individual_2.fitness_score:
+        rank_1 = individual_1
+        rank_2 = individual_2
+    else:
+        rank_1 = individual_2
+        rank_2 = individual_1
+
+    r &lt;- randomly generated number
+
+    if r &lt; win_rate:
+        gene_pool &lt;- rank_1
+    else:
+        gene_pool &lt;- rank_2
+</pre></div>
+</div>
+</div>
+<div class="section" id="roulette-wheel-selection">
+<h2>Roulette wheel selection<a class="headerlink" href="#roulette-wheel-selection" title="Permalink to this headline">¶</a></h2>
+<p>In roulette wheel selection, a roulette wheel is constructed where each slice represents an individual of the population and the area is proportional to its fitness score.</p>
+<p>For a maximisation problem:</p>
+<div class="math notranslate nohighlight">
+\[\text{Area}_i = \cfrac{\text{fitness_score}_i}{\sum_{j = 1}^n \text{fitness_score}_j} \text{Total area}\]</div>
+<p>For minimisation problems, the fitness score first needs to be inverted. One way to invert the fitness score is to subtract the fitness score from the maximum fitness score of the generation and adding 1 <a class="reference internal" href="#fuzzy" id="id1">[Cox05]</a>.</p>
+<div class="math notranslate nohighlight">
+\[\text{fitness_score}_i' = \text{fitness_score}_{max} - \text{fitness_score}_i + 1\]</div>
+<p>Traditionally, the roulette wheel is spun N times with a single marker, and whichever individual the marker lands on enters into the gene pool. One issue with this is that usually the population of the GA is quite small, so while unlikely, it is possible that all spins select bad to mediocre individuals. Stochastic universal sampling <a class="reference internal" href="#baker1987" id="id2">[Bak87]</a> was proposed to counter this problem. Instead of spinning the wheel N times, N markers are placed uniformly around the wheel and the wheel is spun once. Each marker then selected one individual to enter into the mating pool.</p>
+<a class="reference internal image-reference" href="../images/roulette.png"><img alt="../images/roulette.png" class="align-center" src="../images/roulette.png" style="width: 25%;" /></a>
+<p>The main issue with roulette wheel selection is that initially, a small percentage of the population have comparatively excellent fitness scores and so will dominate the wheel, which results in a high selection pressure. As the population converges, the selection pressure decreases because all individuals will have similar fitness scores.</p>
+<p><a class="reference internal" href="../index.html#home"><span class="std std-ref">Return Home</span></a></p>
+<p id="bibtex-bibliography-theory/selection-0"><dl class="citation">
+<dt class="label" id="baker1987"><span class="brackets"><a class="fn-backref" href="#id2">Bak87</a></span></dt>
+<dd><p>James E. Baker. Reducing bias and inefficiency in the selection algorithm. In <em>Proceedings of the Second International Conference on Genetic Algorithms on Genetic Algorithms and Their Application</em>, 14–21. Hillsdale, NJ, USA, 1987. L. Erlbaum Associates Inc. URL: <a class="reference external" href="http://dl.acm.org/citation.cfm?id=42512.42515">http://dl.acm.org/citation.cfm?id=42512.42515</a>.</p>
+</dd>
+<dt class="label" id="fuzzy"><span class="brackets"><a class="fn-backref" href="#id1">Cox05</a></span></dt>
+<dd><p>E. Cox. <em>Fuzzy Modeling and Genetic Algorithms for Data Mining and Exploration</em>. Morgan Kaufmann series in data management systems. Elsevier/Morgan Kaufmann, 2005. ISBN 9780121942755. URL: <a class="reference external" href="https://books.google.com.au/books?id=H93cJpnbwpcC">https://books.google.com.au/books?id=H93cJpnbwpcC</a>.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Selection</a><ul>
+<li><a class="reference internal" href="#tournament-selection">Tournament selection</a></li>
+<li><a class="reference internal" href="#roulette-wheel-selection">Roulette wheel selection</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../himmelblau.html"
+                        title="previous chapter">Demo: finding the minimum of Himmelblau's function</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../class-ga.html"
+                        title="next chapter">ga class</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../sources/theory/selection.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../class-ga.html" title="ga class"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../himmelblau.html" title="Demo: finding the minimum of Himmelblau&#39;s function"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Alison Wong.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

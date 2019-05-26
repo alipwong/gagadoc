@@ -42,11 +42,11 @@ We need to write a function that evaluates an individual and calculates it's fit
 
     def evaluate(individual):
 
-        #  unpack chromosome
-        x = individual.CHROMOSOME['x']
-        y = individual.CHROMOSOME['y']
+        #  unpack genes
+        x = individual.genes['x']
+        y = individual.genes['y']
         
-        individual.FITNESS_SCORE = pow(x, 2) + pow(y, 2)
+        individual.fitness_score = pow(x, 2) + pow(y, 2)
 
 We run the simulation by passing it the genes and the evaluate function we defined earlier. We will run our simulation with a population size of 50 and for 25 epochs. 
 
@@ -96,4 +96,4 @@ Further demonstrations
    
    himmelblau
 
-:ref:`Return Home <mastertoc>`
+:ref:`Return Home <home>`
