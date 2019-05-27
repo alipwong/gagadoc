@@ -13,14 +13,6 @@ Welcome to gaga's documentation!
 
    getstarted
 
-A bit of theory
-===============
-
-.. toctree::
-   :maxdepth: 1
-
-   theory/selection
-
 Classes
 =======
 
@@ -40,6 +32,7 @@ Tips for tuning your genetic algorithm
    :maxdepth: 1
 
    tuning-the-ga/population-size
+   tuning-the-ga/selection
 
 Indices and tables
 ==================

@@ -14,9 +14,7 @@
     <script type="text/javascript" src="../static/language_data.js"></script>
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="ga class" href="../class-ga.html" />
-    <link rel="prev" title="Demo: finding the minimum of Himmelblau&#39;s function" href="../himmelblau.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,12 +25,6 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="../class-ga.html" title="ga class"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="../himmelblau.html" title="Demo: finding the minimum of Himmelblau&#39;s function"
-             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
@@ -66,6 +58,57 @@
         gene_pool &lt;- rank_2
 </pre></div>
 </div>
+<div class="section" id="selection-pressure">
+<h3>Selection pressure<a class="headerlink" href="#selection-pressure" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">ga</span><span class="o">.</span><span class="n">ga</span><span class="p">(</span><span class="n">genes</span><span class="p">,</span>
+            <span class="n">evaluate</span><span class="p">,</span>
+            <span class="n">clone</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="n">epoch</span> <span class="o">=</span> <span class="mi">250</span><span class="p">,</span>
+            <span class="n">population_size</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span>
+            <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">winrate</span> <span class="o">=</span> <span class="n">winrate</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="n">seed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><img alt="../images/tournament_0.9_01.gif" src="../images/tournament_0.9_01.gif" />
+</td>
+<td><img alt="../images/tournament_0.7_01.gif" src="../images/tournament_0.7_01.gif" />
+</td>
+</tr>
+<tr class="row-even"><td><p>Selection pressure is too high</p></td>
+<td><p>Good selection pressure</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">winrate</span> <span class="pre">=</span> <span class="pre">0.9</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">winrate</span> <span class="pre">=</span> <span class="pre">0.7</span></code></p></td>
+</tr>
+<tr class="row-even"><td><img alt="../images/tournament_0.5_01.gif" src="../images/tournament_0.5_01.gif" />
+</td>
+<td><img alt="../images/tournament_0.4_01.gif" src="../images/tournament_0.4_01.gif" />
+</td>
+</tr>
+<tr class="row-odd"><td><p>No selection pressure</p></td>
+<td><p>Negative selection pressure</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">winrate</span> <span class="pre">=</span> <span class="pre">0.5</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">winrate</span> <span class="pre">=</span> <span class="pre">0.4</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Selection pressure is too high</strong></p>
+<p>Only a very small selection of the fittest individuals are allowed to reproduce so there is less variation in each successive generation. Eventually the population may become homogenous (each individual has the same gene set) and exploration of the search space relies entirely on mutation so exploration can be slow.</p>
+<p><strong>Good selection pressure</strong></p>
+<p>A good selection pressure allows the population to explore the search space but preferences fitter individuals so that the population moves towards the global optimum.</p>
+<p><strong>No selection pressure</strong></p>
+<p>When there is no selection pressure each individual is equally likely to reproduce. As a result, the population is equally inclined to explore areas of low fitness and high fitness. Exploration is then random.</p>
+<p><strong>Negative selection pressure</strong></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">winrate</span> <span class="pre">&lt;</span> <span class="pre">0.5</span></code> the individuals with lower fitness are more likely to reproduce. This results in the population moving away from the optimum.</p>
+</div>
 </div>
 <div class="section" id="roulette-wheel-selection">
 <h2>Roulette wheel selection<a class="headerlink" href="#roulette-wheel-selection" title="Permalink to this headline">¶</a></h2>
@@ -73,22 +116,15 @@
 <p>For a maximisation problem:</p>
 <div class="math notranslate nohighlight">
 \[\text{Area}_i = \cfrac{\text{fitness_score}_i}{\sum_{j = 1}^n \text{fitness_score}_j} \text{Total area}\]</div>
-<p>For minimisation problems, the fitness score first needs to be inverted. One way to invert the fitness score is to subtract the fitness score from the maximum fitness score of the generation and adding 1 <a class="reference internal" href="#fuzzy" id="id1">[Cox05]</a>.</p>
+<p>For minimisation problems, the fitness score first needs to be inverted. One way to invert the fitness score is to subtract the fitness score from the maximum fitness score of the generation and adding 1 <a class="reference internal" href="../tuning-the-ga/selection.html#fuzzy" id="id1">[Cox05]</a>.</p>
 <div class="math notranslate nohighlight">
 \[\text{fitness_score}_i' = \text{fitness_score}_{max} - \text{fitness_score}_i + 1\]</div>
-<p>Traditionally, the roulette wheel is spun N times with a single marker, and whichever individual the marker lands on enters into the gene pool. One issue with this is that usually the population of the GA is quite small, so while unlikely, it is possible that all spins select bad to mediocre individuals. Stochastic universal sampling <a class="reference internal" href="#baker1987" id="id2">[Bak87]</a> was proposed to counter this problem. Instead of spinning the wheel N times, N markers are placed uniformly around the wheel and the wheel is spun once. Each marker then selected one individual to enter into the mating pool.</p>
-<a class="reference internal image-reference" href="../images/roulette.png"><img alt="../images/roulette.png" class="align-center" src="../images/roulette.png" style="width: 25%;" /></a>
-<p>The main issue with roulette wheel selection is that initially, a small percentage of the population have comparatively excellent fitness scores and so will dominate the wheel, which results in a high selection pressure. As the population converges, the selection pressure decreases because all individuals will have similar fitness scores.</p>
+<p>Traditionally, the roulette wheel is spun N times with a single marker, and whichever individual the marker lands on enters into the gene pool. An issue with roulette wheel selection is that the wheel may be dominated by a few individuals with comparatively excellent fitness scores and so the next generation will inherit genes primarily from those extremely fit individuals. Over time, variation in the population will decrease and the population will become homogenous. Conversely, if you have a large population the gene pool may be diluted with bad genes, so the roulette wheel may be dominated by the bad/mediocre individuals. It is then possible that none of the fit individuals are chosen for selection, in which case you will loose good genes.</p>
+<a class="reference internal image-reference" href="../images/bad_roulette.png"><img alt="../images/bad_roulette.png" class="align-center" src="../images/bad_roulette.png" style="width: 25%;" /></a>
+<p>Stochastic universal sampling <a class="reference internal" href="../tuning-the-ga/selection.html#baker1987" id="id2">[Bak87]</a> was proposed to address these problems. Instead of spinning the wheel N times, N markers are placed uniformly around the wheel and the wheel is spun once. Each marker then selected one individual to enter into the mating pool.</p>
+<a class="reference internal image-reference" href="../images/roulette1.png"><img alt="../images/roulette1.png" class="align-center" src="../images/roulette1.png" style="width: 25%;" /></a>
 <p><a class="reference internal" href="../index.html#home"><span class="std std-ref">Return Home</span></a></p>
-<p id="bibtex-bibliography-theory/selection-0"><dl class="citation">
-<dt class="label" id="baker1987"><span class="brackets"><a class="fn-backref" href="#id2">Bak87</a></span></dt>
-<dd><p>James E. Baker. Reducing bias and inefficiency in the selection algorithm. In <em>Proceedings of the Second International Conference on Genetic Algorithms on Genetic Algorithms and Their Application</em>, 14–21. Hillsdale, NJ, USA, 1987. L. Erlbaum Associates Inc. URL: <a class="reference external" href="http://dl.acm.org/citation.cfm?id=42512.42515">http://dl.acm.org/citation.cfm?id=42512.42515</a>.</p>
-</dd>
-<dt class="label" id="fuzzy"><span class="brackets"><a class="fn-backref" href="#id1">Cox05</a></span></dt>
-<dd><p>E. Cox. <em>Fuzzy Modeling and Genetic Algorithms for Data Mining and Exploration</em>. Morgan Kaufmann series in data management systems. Elsevier/Morgan Kaufmann, 2005. ISBN 9780121942755. URL: <a class="reference external" href="https://books.google.com.au/books?id=H93cJpnbwpcC">https://books.google.com.au/books?id=H93cJpnbwpcC</a>.</p>
-</dd>
-</dl>
-</p>
+<p id="bibtex-bibliography-theory/selection-0"></p>
 </div>
 </div>
 
@@ -101,18 +137,15 @@
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Selection</a><ul>
-<li><a class="reference internal" href="#tournament-selection">Tournament selection</a></li>
+<li><a class="reference internal" href="#tournament-selection">Tournament selection</a><ul>
+<li><a class="reference internal" href="#selection-pressure">Selection pressure</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#roulette-wheel-selection">Roulette wheel selection</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../himmelblau.html"
-                        title="previous chapter">Demo: finding the minimum of Himmelblau's function</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="../class-ga.html"
-                        title="next chapter">ga class</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -143,12 +176,6 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="../class-ga.html" title="ga class"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="../himmelblau.html" title="Demo: finding the minimum of Himmelblau&#39;s function"
-             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.1 documentation</a> &#187;</li> 
       </ul>
     </div>

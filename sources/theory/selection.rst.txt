@@ -15,20 +15,60 @@ In tournament selection, *n* tournaments are hosted, and the winner of each tour
 .. code-block:: text
 
     tournament(ind_1, ind_2, win_rate, gene_pool):
-        
+
         if individual_1.fitness_score > individual_2.fitness_score:
             rank_1 = individual_1
             rank_2 = individual_2
         else:
             rank_1 = individual_2
             rank_2 = individual_1
-        
+
         r <- randomly generated number
 
         if r < win_rate:
             gene_pool <- rank_1
         else:
             gene_pool <- rank_2
+
+Selection pressure
+""""""""""""""""""
+
+.. code-block:: python
+
+    sim = ga.ga(genes, 
+                evaluate, 
+                clone = 0, 
+                epoch = 250, 
+                population_size = 40,
+                sigma = 0.5, 
+                winrate = winrate)
+    sim.run_simulation(seed = 0)
+
+=============================================================  ============================================================= 
+.. image:: ../static/tuning/selection/tournament_0.9_0.gif     .. image:: ../static/tuning/selection/tournament_0.7_0.gif 
+Selection pressure is too high                                   Good selection pressure
+``winrate = 0.9``                                                   ``winrate = 0.7``                                 
+-------------------------------------------------------------  ------------------------------------------------------------- 
+.. image:: ../static/tuning/selection/tournament_0.5_0.gif     .. image:: ../static/tuning/selection/tournament_0.4_0.gif 
+No selection pressure                                           Negative selection pressure
+``winrate = 0.5``                                                   ``winrate = 0.4``                                
+=============================================================  ============================================================= 
+
+**Selection pressure is too high**
+
+Only a very small selection of the fittest individuals are allowed to reproduce so there is less variation in each successive generation. Eventually the population may become homogenous (each individual has the same gene set) and exploration of the search space relies entirely on mutation so exploration can be slow.
+
+**Good selection pressure**
+
+A good selection pressure allows the population to explore the search space but preferences fitter individuals so that the population moves towards the global optimum.
+
+**No selection pressure**
+
+When there is no selection pressure each individual is equally likely to reproduce. As a result, the population is equally inclined to explore areas of low fitness and high fitness. Exploration is then random.
+
+**Negative selection pressure**
+
+If ``winrate < 0.5`` the individuals with lower fitness are more likely to reproduce. This results in the population moving away from the optimum.
 
 Roulette wheel selection
 ------------------------
@@ -43,13 +83,17 @@ For minimisation problems, the fitness score first needs to be inverted. One way
 
 .. math:: \text{fitness_score}_i' = \text{fitness_score}_{max} - \text{fitness_score}_i + 1
 
-Traditionally, the roulette wheel is spun N times with a single marker, and whichever individual the marker lands on enters into the gene pool. One issue with this is that usually the population of the GA is quite small, so while unlikely, it is possible that all spins select bad to mediocre individuals. Stochastic universal sampling :cite:`Baker1987` was proposed to counter this problem. Instead of spinning the wheel N times, N markers are placed uniformly around the wheel and the wheel is spun once. Each marker then selected one individual to enter into the mating pool.
+Traditionally, the roulette wheel is spun N times with a single marker, and whichever individual the marker lands on enters into the gene pool. An issue with roulette wheel selection is that the wheel may be dominated by a few individuals with comparatively excellent fitness scores and so the next generation will inherit genes primarily from those extremely fit individuals. Over time, variation in the population will decrease and the population will become homogenous. Conversely, if you have a large population the gene pool may be diluted with bad genes, so the roulette wheel may be dominated by the bad/mediocre individuals. It is then possible that none of the fit individuals are chosen for selection, in which case you will loose good genes.
+
+.. image:: ../static/bad_roulette.png
+    :align: center
+    :width: 25%
+
+Stochastic universal sampling :cite:`Baker1987` was proposed to address these problems. Instead of spinning the wheel N times, N markers are placed uniformly around the wheel and the wheel is spun once. Each marker then selected one individual to enter into the mating pool.
 
 .. image:: ../static/roulette.png
     :align: center
     :width: 25%
-
-The main issue with roulette wheel selection is that initially, a small percentage of the population have comparatively excellent fitness scores and so will dominate the wheel, which results in a high selection pressure. As the population converges, the selection pressure decreases because all individuals will have similar fitness scores.
 
 :ref:`Return Home <home>`
 
