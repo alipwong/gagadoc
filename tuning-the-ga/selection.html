@@ -15,7 +15,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="The power of cloning" href="cloning.html" />
+    <link rel="next" title="Cloning" href="cloning.html" />
     <link rel="prev" title="Population size" href="population-size.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -28,7 +28,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="cloning.html" title="The power of cloning"
+          <a href="cloning.html" title="Cloning"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="population-size.html" title="Population size"
@@ -46,6 +46,14 @@
 <span id="selection-theory"></span><h1>Selection<a class="headerlink" href="#selection" title="Permalink to this headline">¶</a></h1>
 <p>The selection process aims to mimic natural selection where individuals that are unfit do not survive. In the selection stage, the fittest individuals selected to survive and enter into the gene pool where they will have the opportunity to reproduce. Selection schemes can be classified as a proportional selection where selection is proportional to the fitness score or ordinal selection if it depends on the rank of the fitness score</p>
 <p>When designing the selection mechanism <em>selection pressure</em> needs to be taken into account. The selection pressure describes the degree of bias towards fitter chromosomes. A high selection pressure highly favours the individuals with the best fitness score. While this may greatly improve the overall fitness of the following generation, the population is at risk of becoming homogenous and result in a poor exploration of the solution space. If however the selection pressure is too low, evolution can be quite slow.</p>
+<div class="section" id="demonstrations">
+<h2>Demonstrations<a class="headerlink" href="#demonstrations" title="Permalink to this headline">¶</a></h2>
+<p>In this demonstration we will use Rosenbrock's banana.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../demos/rosenbrock.html#rosenbrock"><span class="std std-ref">Rosenbrock's banana</span></a></p>
+</div>
+</div>
 <div class="section" id="tournament-selection">
 <h2>Tournament selection<a class="headerlink" href="#tournament-selection" title="Permalink to this headline">¶</a></h2>
 <p>In tournament selection, <em>n</em> tournaments are hosted, and the winner of each tournament goes into the gene pool. For each tournament, 2 participants are chosen from the population and the individual with the better fitness score will win with probability <code class="docutils literal notranslate"><span class="pre">win_rate</span></code> otherwise the indiviual with the lower fitness score will win. You can change the selection pressure by adjusting <code class="docutils literal notranslate"><span class="pre">win_rate</span></code>. Tournament selection is a type of <em>ordinal</em> selection method as it is based on the rank of an individual's fitness score.</p>
@@ -169,6 +177,7 @@
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Selection</a><ul>
+<li><a class="reference internal" href="#demonstrations">Demonstrations</a></li>
 <li><a class="reference internal" href="#tournament-selection">Tournament selection</a><ul>
 <li><a class="reference internal" href="#selection-pressure">Selection pressure</a></li>
 </ul>
@@ -183,7 +192,7 @@
                         title="previous chapter">Population size</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="cloning.html"
-                        title="next chapter">The power of cloning</a></p>
+                        title="next chapter">Cloning</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -215,7 +224,7 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="cloning.html" title="The power of cloning"
+          <a href="cloning.html" title="Cloning"
              >next</a> |</li>
         <li class="right" >
           <a href="population-size.html" title="Population size"

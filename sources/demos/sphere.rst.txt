@@ -1,0 +1,75 @@
+The sphere function
+-------------------
+.. image:: ../static/Sphere_function.jpg
+    :align: center
+    :width: 45%
+    :target: https://en.wikipedia.org/wiki/File:Sphere_function_in_3D.pdf
+
+.. math:: f(x, y) = \sum_{i - 1}^n x_i^2
+
+The sphere function is an simple optimisation test function because the gradient points toward the global minimum. The minimum is located at :math:`f(0) = 0`.
+
+.. code-block:: python
+
+   import gaga as ga
+
+Each individual in our population will have two genes, :math:`x` and :math:`y`. We will define these in the range :math:`-1.5 < x, y < 1.5`. 
+
+.. code-block:: python
+
+    gene_definition = {'x':(-1.5, 1.5),
+                       'y':(-1.5, 1.5)}
+
+We need to write a function that evaluates an individual and calculates it's fitness score from the objective function we are trying to minimise.
+
+.. code-block:: python
+
+    def evaluate(individual):
+
+        #  unpack genes
+        x = individual.genes['x']
+        y = individual.genes['y']
+        
+        individual.fitness_score = pow(x, 2) + pow(y, 2)
+
+We run the simulation by passing it the genes and the evaluate function we defined earlier. We will run our simulation with a population size of 50 and for 25 epochs. 
+
+.. code-block:: python
+
+    sim = ga.ga(gene_definition,
+                evaluate,
+                epoch = 25,
+                population_size = 50)
+    sim.run_simulation()
+
+The following will display the gene values and the fitness score of the individual with the best fitness.
+
+.. code-block:: python
+
+    sim.results.print_best()
+
+|   x: -1.183347e-03
+|   y: -9.174441e-04
+|   fitness score: 2.242015e-06
+
+We can also display the fitness of the best individual at each epoch.
+
+.. code-block:: python
+
+    sim.results.plot_fitness()
+
+.. image:: ../static/sphere_fitness.png
+    :align: center
+    :width: 45%
+
+Finally, the following will generate an animation. We also specify the analytical minimum so that it is marked in the animation. By default, the animation is saved in a folder called *results*.
+
+.. code-block:: python
+
+    sim.results.animate('x', 'y', optimum = [0, 0])
+
+.. image:: ../static/sphere.gif
+    :align: center
+    :width: 45%
+
+:ref:`Return Home <home>`

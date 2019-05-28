@@ -1,0 +1,77 @@
+.. _rosenbrock:
+
+Rosenbrock's banana
+-------------------
+.. image:: ../static/Rosenbrock_function.png
+    :align: center
+    :target: https://en.wikipedia.org/wiki/Rosenbrock_function
+
+:math:`f(x,y) = (a-x)^2 + b(y - x^2)^2`
+
+For the constants :math:`a = 1` and :math:`b = 100`, the minimum is at :math:`f(1,1) = 0`.
+
+.. code-block:: python
+
+   import gaga as ga
+
+Each individual in our population will have two genes, :math:`x` and :math:`y`. We will define these in the range :math:`-2 < x < 2` and :math:`-1 < y < 3`. 
+
+.. code-block:: python
+
+    genes = {'x':(-2, 2),
+            'y':(-1, 3)}
+
+
+We need to write a function that evaluates an individual and calculates it's fitness score from the objective function we are trying to minimise.
+
+.. code-block:: python
+
+    def evaluate(individual):
+
+        a = 1
+        b = 100
+
+        x = individual.genes['x']
+        y = individual.genes['y']
+
+        individual.fitness_score = (pow(a - x, 2) + b * pow(y - pow(x, 2), 2))
+
+We run the simulation by passing it the genes and the evaluate function we defined earlier. We will run our simulation with a population size of 50 and for 25 epochs. 
+
+.. code-block:: python
+
+    sim = ga.ga(gene_definition,
+                evaluate,
+                epoch = 25,
+                population_size = 50)
+    sim.run_simulation()
+
+The following will display the gene values and the fitness score of the individual with the best fitness.
+
+.. code-block:: python
+
+    sim.results.print_best()
+
+|   x: 9.950463e-01
+|   y: 9.899284e-01
+|   fitness score: 2.810161e-05
+
+We can also display the fitness of the best individual at each epoch.
+
+.. code-block:: python
+
+    sim.results.plot_fitness()
+
+.. image:: ../static/rosen-fitness-pycharm.png
+    :align: center
+    :width: 45%
+
+Finally, the following will generate an animation. We also specify the analytical minimum so that it is marked in the animation. By default, the animation is saved in a folder called *results*.
+
+.. code-block:: python
+
+    sim.results.animate('x', 'y', optimum = [0, 0])
+
+.. image:: ../static/x_y_animation-pycharm.gif
+    :align: center
+    :width: 45%

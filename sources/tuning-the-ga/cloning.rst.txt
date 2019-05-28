@@ -6,7 +6,13 @@ In the elitist model (:cite:`DeJong1975`) the best individual is saved in each g
 Demonstration
 -------------
 
-In this demonstration we use a small population (``population_size = 10``) and we compare the performance without cloning and where we clone the best individual at each generation. We can see that without cloning, the best genes are often lost and have to be rediscovered making the search quite slow. When we clone the best individual, the cloned individual helps to direct the population towards the closest minimum. We can also see that the fitness score at each epoch improves.
+In this demonstration we will try to find the minimum of Rosenbrock's banana.
+
+.. seealso::
+    
+    :ref:`Rosenbrock's banana <rosenbrock>`
+
+We use a small population (``population_size = 10``) and we compare the performance without cloning and where we clone the best individual at each generation. We can see that without cloning, the best genes are often lost and have to be rediscovered making the search quite slow. When we clone the best individual, the cloned individual helps to direct the population towards the closest minimum. We can also see that the fitness score at each epoch improves.
 
 .. code-block:: python
 

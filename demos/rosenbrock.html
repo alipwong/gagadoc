@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="Python">
+  <head>
+    <meta charset="utf-8" />
+    <title>Rosenbrock&#39;s banana &#8212; gaga 0.1.1 documentation</title>
+    <link rel="stylesheet" href="../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <script type="text/javascript" src="../static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Population size" href="../tuning-the-ga/population-size.html" />
+    <link rel="prev" title="results class" href="../class-results.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../tuning-the-ga/population-size.html" title="Population size"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../class-results.html" title="results class"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="rosenbrock-s-banana">
+<span id="rosenbrock"></span><h1>Rosenbrock's banana<a class="headerlink" href="#rosenbrock-s-banana" title="Permalink to this headline">¶</a></h1>
+<a class="reference external image-reference" href="https://en.wikipedia.org/wiki/Rosenbrock_function"><img alt="../images/Rosenbrock_function.png" class="align-center" src="../images/Rosenbrock_function.png" /></a>
+<p><span class="math notranslate nohighlight">\(f(x,y) = (a-x)^2 + b(y - x^2)^2\)</span></p>
+<p>For the constants <span class="math notranslate nohighlight">\(a = 1\)</span> and <span class="math notranslate nohighlight">\(b = 100\)</span>, the minimum is at <span class="math notranslate nohighlight">\(f(1,1) = 0\)</span>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gaga</span> <span class="kn">as</span> <span class="nn">ga</span>
+</pre></div>
+</div>
+<p>Each individual in our population will have two genes, <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>. We will define these in the range <span class="math notranslate nohighlight">\(-2 &lt; x &lt; 2\)</span> and <span class="math notranslate nohighlight">\(-1 &lt; y &lt; 3\)</span>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">genes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s1">&#39;y&#39;</span><span class="p">:(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)}</span>
+</pre></div>
+</div>
+<p>We need to write a function that evaluates an individual and calculates it's fitness score from the objective function we are trying to minimise.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">individual</span><span class="p">):</span>
+
+    <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mi">100</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">individual</span><span class="o">.</span><span class="n">genes</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">individual</span><span class="o">.</span><span class="n">genes</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+
+    <span class="n">individual</span><span class="o">.</span><span class="n">fitness_score</span> <span class="o">=</span> <span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>We run the simulation by passing it the genes and the evaluate function we defined earlier. We will run our simulation with a population size of 50 and for 25 epochs.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">ga</span><span class="o">.</span><span class="n">ga</span><span class="p">(</span><span class="n">gene_definition</span><span class="p">,</span>
+            <span class="n">evaluate</span><span class="p">,</span>
+            <span class="n">epoch</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span>
+            <span class="n">population_size</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The following will display the gene values and the fitness score of the individual with the best fitness.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">print_best</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">x: 9.950463e-01</div>
+<div class="line">y: 9.899284e-01</div>
+<div class="line">fitness score: 2.810161e-05</div>
+</div>
+<p>We can also display the fitness of the best individual at each epoch.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">plot_fitness</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../images/rosen-fitness-pycharm.png"><img alt="../images/rosen-fitness-pycharm.png" class="align-center" src="../images/rosen-fitness-pycharm.png" style="width: 45%;" /></a>
+<p>Finally, the following will generate an animation. We also specify the analytical minimum so that it is marked in the animation. By default, the animation is saved in a folder called <em>results</em>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">optimum</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../images/x_y_animation-pycharm.gif"><img alt="../images/x_y_animation-pycharm.gif" class="align-center" src="../images/x_y_animation-pycharm.gif" style="width: 45%;" /></a>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../class-results.html"
+                        title="previous chapter">results class</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../tuning-the-ga/population-size.html"
+                        title="next chapter">Population size</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../sources/demos/rosenbrock.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../tuning-the-ga/population-size.html" title="Population size"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../class-results.html" title="results class"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Alison Wong.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

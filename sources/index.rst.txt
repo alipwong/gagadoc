@@ -8,10 +8,23 @@
 Welcome to gaga's documentation!
 ================================
 
+Get started!
+------------
+
+To get started, download gaga using pip.
+
+.. code-block:: bash
+
+   pip install gaga
+
+Demonstrations
+===============
+
 .. toctree::
    :maxdepth: 1
-
-   getstarted
+   
+   demos/sphere
+   demos/rosenbrock
 
 Classes
 =======
@@ -22,7 +35,6 @@ Classes
    class-ga
    class-individual
    class-results
-
 
 
 Tips for tuning your genetic algorithm

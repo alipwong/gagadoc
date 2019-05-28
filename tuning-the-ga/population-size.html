@@ -16,7 +16,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Selection" href="selection.html" />
-    <link rel="prev" title="results class" href="../class-results.html" /> 
+    <link rel="prev" title="Rosenbrock&#39;s banana" href="../demos/rosenbrock.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -31,7 +31,7 @@
           <a href="selection.html" title="Selection"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../class-results.html" title="results class"
+          <a href="../demos/rosenbrock.html" title="Rosenbrock&#39;s banana"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.1 documentation</a> &#187;</li> 
       </ul>
@@ -45,24 +45,9 @@
   <div class="section" id="population-size">
 <h1>Population size<a class="headerlink" href="#population-size" title="Permalink to this headline">¶</a></h1>
 <p>The aim of this tutorial is to help you select a population size for your genetic algorithm. We will use Rosenbrock's banana function.</p>
-<p><span class="math notranslate nohighlight">\(f(x,y) = (a-x)^2 + b(y - x^2)^2\)</span></p>
-<p>For the constants <span class="math notranslate nohighlight">\(a = 1\)</span> and <span class="math notranslate nohighlight">\(b = 100\)</span>, the minimum is at <span class="math notranslate nohighlight">\(f(1,1) = 0\)</span>.</p>
-<a class="reference external image-reference" href="https://en.wikipedia.org/wiki/Rosenbrock_function"><img alt="../images/Rosenbrock_function.png" class="align-center" src="../images/Rosenbrock_function.png" /></a>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gaga</span> <span class="kn">as</span> <span class="nn">ga</span>
-
-<span class="n">genes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
-        <span class="s1">&#39;y&#39;</span><span class="p">:(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)}</span>
-
-<span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">individual</span><span class="p">):</span>
-
-    <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="mi">100</span>
-
-    <span class="n">x</span> <span class="o">=</span> <span class="n">individual</span><span class="o">.</span><span class="n">genes</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">individual</span><span class="o">.</span><span class="n">genes</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
-
-    <span class="n">individual</span><span class="o">.</span><span class="n">fitness_score</span> <span class="o">=</span> <span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span>
-</pre></div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="../demos/rosenbrock.html#rosenbrock"><span class="std std-ref">Rosenbrock's banana</span></a></p>
 </div>
 <div class="section" id="a-small-population">
 <h2>A small population<a class="headerlink" href="#a-small-population" title="Permalink to this headline">¶</a></h2>
@@ -211,8 +196,8 @@
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../class-results.html"
-                        title="previous chapter">results class</a></p>
+  <p class="topless"><a href="../demos/rosenbrock.html"
+                        title="previous chapter">Rosenbrock's banana</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="selection.html"
                         title="next chapter">Selection</a></p>
@@ -250,7 +235,7 @@
           <a href="selection.html" title="Selection"
              >next</a> |</li>
         <li class="right" >
-          <a href="../class-results.html" title="results class"
+          <a href="../demos/rosenbrock.html" title="Rosenbrock&#39;s banana"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.1 documentation</a> &#187;</li> 
       </ul>

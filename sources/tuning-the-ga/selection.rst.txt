@@ -7,6 +7,15 @@ The selection process aims to mimic natural selection where individuals that are
 
 When designing the selection mechanism *selection pressure* needs to be taken into account. The selection pressure describes the degree of bias towards fitter chromosomes. A high selection pressure highly favours the individuals with the best fitness score. While this may greatly improve the overall fitness of the following generation, the population is at risk of becoming homogenous and result in a poor exploration of the solution space. If however the selection pressure is too low, evolution can be quite slow.
 
+Demonstrations
+--------------
+
+In this demonstration we will use Rosenbrock's banana.
+
+.. seealso::
+    
+    :ref:`Rosenbrock's banana <rosenbrock>`
+
 Tournament selection
 --------------------
 
