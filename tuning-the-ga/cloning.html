@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="Python">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cloning &#8212; gaga 0.1.1 documentation</title>
+    <link rel="stylesheet" href="../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <script type="text/javascript" src="../static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Selection" href="selection.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="selection.html" title="Selection"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="cloning">
+<h1>Cloning<a class="headerlink" href="#cloning" title="Permalink to this headline">¶</a></h1>
+<p>In the elitist model (<a class="reference internal" href="#dejong1975" id="id1">[DJ75]</a>) the best individual is saved in each generation and in general significantly improves the performance of the GA (<a class="reference internal" href="#mitchell1998" id="id2">[Mit98]</a>). The act of ‘saving’ an individual ensures that good genes are preserved so the GA doesn’t waste time locating them again. However, elitism improves local search at the expense of a global search (<a class="reference internal" href="#dejong1975" id="id3">[DJ75]</a>). Supposing that the protected individual is situated at a local optima, at each generation it will likely pass on its genetic material via crossover, so the population will progress towards the local optima it has located.</p>
+<div class="section" id="demonstration">
+<h2>Demonstration<a class="headerlink" href="#demonstration" title="Permalink to this headline">¶</a></h2>
+<p>In this demonstration we use a small population (<code class="docutils literal notranslate"><span class="pre">population_size</span> <span class="pre">=</span> <span class="pre">10</span></code>) and we compare the performance without cloning and where we clone the best individual at each generation. We can see that without cloning, the best genes are often lost and have to be rediscovered making the search quite slow. When we clone the best individual, the cloned individual helps to direct the population towards the closest minimum. We can also see that the fitness score at each epoch improves.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">ga</span><span class="o">.</span><span class="n">ga</span><span class="p">(</span><span class="n">genes</span><span class="p">,</span>
+            <span class="n">evaluate</span><span class="p">,</span>
+            <span class="n">clone</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="n">mutate</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span>
+            <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span>
+            <span class="n">population_size</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="n">seed</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><img alt="../images/no_cloning_1.gif" src="../images/no_cloning_1.gif" />
+</td>
+<td><img alt="../images/cloning_1.gif" src="../images/cloning_1.gif" />
+</td>
+</tr>
+<tr class="row-even"><td><img alt="../images/no_cloning_1.png" src="../images/no_cloning_1.png" />
+</td>
+<td><img alt="../images/cloning_1.png" src="../images/cloning_1.png" />
+</td>
+</tr>
+<tr class="row-odd"><td><p>No cloning</p></td>
+<td><p>Cloning</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">clone</span> <span class="pre">=</span> <span class="pre">0</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">clone</span> <span class="pre">=</span> <span class="pre">1</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference internal" href="../index.html#home"><span class="std std-ref">Return Home</span></a></p>
+<p id="bibtex-bibliography-tuning-the-ga/cloning-0"><dl class="citation">
+<dt class="label" id="dejong1975"><span class="brackets">DJ75</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id3">2</a>)</span></dt>
+<dd><p>Kenneth Alan De Jong. <em>An Analysis of the Behavior of a Class of Genetic Adaptive Systems.</em> University of Michigan, Ann Arbor, MI, USA, 1975. ISBN. AAI7609381.</p>
+</dd>
+<dt class="label" id="mitchell1998"><span class="brackets"><a class="fn-backref" href="#id2">Mit98</a></span></dt>
+<dd><p>Melanie Mitchell. <em>An Introduction to Genetic Algorithms</em>. MIT Press, Cambridge, MA, USA, 1998. ISBN 0262631857.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Cloning</a><ul>
+<li><a class="reference internal" href="#demonstration">Demonstration</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="selection.html"
+                        title="previous chapter">Selection</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../sources/tuning-the-ga/cloning.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="selection.html" title="Selection"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Alison Wong.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

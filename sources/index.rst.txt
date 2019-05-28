@@ -33,6 +33,7 @@ Tips for tuning your genetic algorithm
 
    tuning-the-ga/population-size
    tuning-the-ga/selection
+   tuning-the-ga/cloning
 
 Indices and tables
 ==================
