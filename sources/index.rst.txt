@@ -11,7 +11,7 @@ Welcome to gaga's documentation!
 Get started!
 ------------
 
-To get started, download gaga using pip.
+To get started, download gaga using pip. Then check out some of the demonstrations below.
 
 .. code-block:: bash
 
@@ -46,6 +46,7 @@ Tips for tuning your genetic algorithm
    tuning-the-ga/population-size
    tuning-the-ga/selection
    tuning-the-ga/cloning
+   tuning-the-ga/speciation
 
 Indices and tables
 ==================
