@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="Python">
+  <head>
+    <meta charset="utf-8" />
+    <title>Visualising the behaviour of your genetic algorithm &#8212; gaga 0.1.1 documentation</title>
+    <link rel="stylesheet" href="../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <script type="text/javascript" src="../static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Loading results" href="load-results.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="load-results.html" title="Loading results"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="visualising-the-behaviour-of-your-genetic-algorithm">
+<h1>Visualising the behaviour of your genetic algorithm<a class="headerlink" href="#visualising-the-behaviour-of-your-genetic-algorithm" title="Permalink to this headline">¶</a></h1>
+<p>You can visualise the behaviour of your genetic algorithm using <code class="docutils literal notranslate"><span class="pre">animate</span></code>. Here is a quick example where we use the genetic algorithm to fit Himmelblau's function (See <a class="reference internal" href="../tuning-the-ga/speciation.html#himmelblau"><span class="std std-ref">here</span></a> for more on Himmelblau's function).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">ga</span><span class="o">.</span><span class="n">ga</span><span class="p">(</span><span class="n">genes</span><span class="p">,</span>
+        <span class="n">evaluate</span><span class="p">,</span>
+        <span class="n">population_size</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="n">epoch</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="n">mutate_crossover</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="n">speciate</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="n">mutate</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">,</span>
+        <span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">(</span><span class="n">seed</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="default">
+<h2>Default<a class="headerlink" href="#default" title="Permalink to this headline">¶</a></h2>
+<p>You can see the progression of the population in the <em>x</em> and <em>y</em> genes with the default settings which will create <code class="docutils literal notranslate"><span class="pre">x_y_animation.gif</span></code> in your results folder.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../images/default.gif"><img alt="../images/default.gif" class="align-center" src="../images/default.gif" style="width: 45%;" /></a>
+</div>
+<div class="section" id="fmin-and-fmax">
+<span id="fmin-fmax"></span><h2>fmin and fmax<a class="headerlink" href="#fmin-and-fmax" title="Permalink to this headline">¶</a></h2>
+<p>In the default animation, you can see that the colorbar goes up to a fitness score of 600, although a majority of the individuals have a fitness score below 200. You can use <code class="docutils literal notranslate"><span class="pre">fmax</span></code> and <code class="docutils literal notranslate"><span class="pre">fmin</span></code> to adjust the range of the colorbar.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">fmax</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../images/fmax.gif"><img alt="../images/fmax.gif" class="align-center" src="../images/fmax.gif" style="width: 45%;" /></a>
+</div>
+<div class="section" id="marking-the-optimum">
+<span id="optima"></span><h2>Marking the optimum<a class="headerlink" href="#marking-the-optimum" title="Permalink to this headline">¶</a></h2>
+<p>You can mark a single optimum on the animation by passing in a list with an <em>x</em> and <em>y</em> coordinate. You can mark multiple optimums by passing in a list with a list of <em>x</em> and a list of corresponding <em>y</em> coordinates.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># single optimum (Left)</span>
+<span class="n">anim</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span>
+                       <span class="n">optimum</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+                       <span class="n">oc</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span>
+                       <span class="n">fmax</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># multiple optimum (right)</span>
+<span class="n">anim</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span>
+                       <span class="n">optimum</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.805118</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.779310</span><span class="p">,</span> <span class="mf">3.584428</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mf">3.131312</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.283186</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.848126</span><span class="p">]],</span>
+                       <span class="n">oc</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span>
+                       <span class="n">fmax</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 49%" />
+<col style="width: 51%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><img alt="../images/single-optimum.gif" src="../images/single-optimum.gif" />
+</td>
+<td><img alt="../images/multiple-optimum.gif" src="../images/multiple-optimum.gif" />
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="inset">
+<span id="id1"></span><h2>Inset<a class="headerlink" href="#inset" title="Permalink to this headline">¶</a></h2>
+<p>By default, an inset will be marked around the median individual of the final population. If there is a single optimum, this is where the population will have converged to.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span>
+                            <span class="n">optimum</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.805118</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.779310</span><span class="p">,</span> <span class="mf">3.584428</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mf">3.131312</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.283186</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.848126</span><span class="p">]],</span>
+                            <span class="n">oc</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span>
+                            <span class="n">fmax</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+                            <span class="n">inset</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../images/default_inset.gif"><img alt="../images/default_inset.gif" class="align-center" src="../images/default_inset.gif" style="width: 75%;" /></a>
+<p>You can also specify the bounds of the inset with <code class="docutils literal notranslate"><span class="pre">inset</span> <span class="pre">=</span> <span class="pre">[xmin,</span> <span class="pre">xmax,</span> <span class="pre">ymin,</span> <span class="pre">ymax]</span></code></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span>
+                            <span class="n">optimum</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.805118</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.779310</span><span class="p">,</span> <span class="mf">3.584428</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mf">3.131312</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.283186</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.848126</span><span class="p">]],</span>
+                            <span class="n">oc</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span>
+                            <span class="n">fmax</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+                            <span class="n">inset</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">3.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">])</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../images/specified_inset.gif"><img alt="../images/specified_inset.gif" class="align-center" src="../images/specified_inset.gif" style="width: 75%;" /></a>
+</div>
+<div class="section" id="fitness-on-a-logscale">
+<span id="fitness-logscale"></span><h2>Fitness on a logscale<a class="headerlink" href="#fitness-on-a-logscale" title="Permalink to this headline">¶</a></h2>
+<p>You can put the fitness on a logscale by setting <code class="docutils literal notranslate"><span class="pre">log_scale</span> <span class="pre">=</span> <span class="pre">True</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span>
+                       <span class="n">optimum</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.805118</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.779310</span><span class="p">,</span> <span class="mf">3.584428</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mf">3.131312</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.283186</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.848126</span><span class="p">]],</span>
+                       <span class="n">oc</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span>
+                       <span class="n">inset</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+                       <span class="n">log_scale</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+                       <span class="n">fmin</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../images/logscale.gif"><img alt="../images/logscale.gif" class="align-center" src="../images/logscale.gif" style="width: 75%;" /></a>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>There is nothing to handle cases where the fitness is 0 and the log is undefined.</p>
+</div>
+</div>
+<div class="section" id="transparency">
+<h2>Transparency<a class="headerlink" href="#transparency" title="Permalink to this headline">¶</a></h2>
+<p>Increasing the transparency can help you to visualise which areas your population spends the most time exploring.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">anim</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span>
+                            <span class="n">optimum</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.805118</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.779310</span><span class="p">,</span> <span class="mf">3.584428</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mf">3.131312</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.283186</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.848126</span><span class="p">]],</span>
+                            <span class="n">oc</span> <span class="o">=</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span>
+                            <span class="n">fmax</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+                            <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>
+                            <span class="n">s</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../images/alpha.gif"><img alt="../images/alpha.gif" class="align-center" src="../images/alpha.gif" style="width: 45%;" /></a>
+</div>
+<div class="section" id="colormap">
+<span id="id2"></span><h2>Colormap<a class="headerlink" href="#colormap" title="Permalink to this headline">¶</a></h2>
+<p>You can specify a colormap.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
+
+<span class="n">anim</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span>
+                            <span class="n">cmap</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">viridis_r</span><span class="p">,</span>
+                            <span class="n">fmax</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../images/cmap.gif"><img alt="../images/cmap.gif" class="align-center" src="../images/cmap.gif" style="width: 45%;" /></a>
+<p><a class="reference internal" href="../index.html#home"><span class="std std-ref">Return Home</span></a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Visualising the behaviour of your genetic algorithm</a><ul>
+<li><a class="reference internal" href="#default">Default</a></li>
+<li><a class="reference internal" href="#fmin-and-fmax">fmin and fmax</a></li>
+<li><a class="reference internal" href="#marking-the-optimum">Marking the optimum</a></li>
+<li><a class="reference internal" href="#inset">Inset</a></li>
+<li><a class="reference internal" href="#fitness-on-a-logscale">Fitness on a logscale</a></li>
+<li><a class="reference internal" href="#transparency">Transparency</a></li>
+<li><a class="reference internal" href="#colormap">Colormap</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="load-results.html"
+                        title="previous chapter">Loading results</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../sources/results/animate.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="load-results.html" title="Loading results"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Alison Wong.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

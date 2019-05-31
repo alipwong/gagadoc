@@ -47,95 +47,159 @@
 <dl class="class">
 <dt id="Results.Results">
 <em class="property">class </em><code class="descclassname">Results.</code><code class="descname">Results</code><a class="headerlink" href="#Results.Results" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
+<dd><p>This class defines a results object that is created at the end of running a genetic algorithm simulation.</p>
+<dl class="method">
 <dt id="Results.Results.animate">
-<code class="descname">animate</code><span class="sig-paren">(</span><em>x_gene</em>, <em>y_gene</em>, <em>s=5</em>, <em>alpha=0.5</em>, <em>fps=30</em>, <em>bounds=None</em>, <em>log_scale=False</em>, <em>fmin=None</em>, <em>fmax=None</em>, <em>cmap=&lt;matplotlib.colors.LinearSegmentedColormap object&gt;</em>, <em>optimum=[]</em>, <em>os=100</em>, <em>o_front=True</em>, <em>om='*'</em>, <em>oc='k'</em>, <em>inset=False</em>, <em>filename=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Results.Results.animate" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="Results.Results.create_fitness_df">
-<code class="descname">create_fitness_df</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Results.Results.create_fitness_df" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="Results.Results.draw">
-<code class="descname">draw</code><span class="sig-paren">(</span><em>i</em>, <em>ax</em>, <em>x_gene</em>, <em>y_gene</em>, <em>s</em>, <em>alpha</em>, <em>cmap</em>, <em>fmin</em>, <em>fmax</em>, <em>bounds</em>, <em>optimum</em>, <em>os</em>, <em>o_front</em>, <em>om</em>, <em>oc</em><span class="sig-paren">)</span><a class="headerlink" href="#Results.Results.draw" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="Results.Results.draw_inset">
-<code class="descname">draw_inset</code><span class="sig-paren">(</span><em>i</em>, <em>ax1</em>, <em>ax2</em>, <em>x_gene</em>, <em>y_gene</em>, <em>s</em>, <em>alpha</em>, <em>cmap</em>, <em>fmin</em>, <em>fmax</em>, <em>bounds</em>, <em>optimum</em>, <em>os</em>, <em>o_front</em>, <em>om</em>, <em>oc</em>, <em>inset</em><span class="sig-paren">)</span><a class="headerlink" href="#Results.Results.draw_inset" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">animate</code><span class="sig-paren">(</span><em>x_gene</em>, <em>y_gene</em>, <em>s=5</em>, <em>alpha=0.5</em>, <em>fps=30</em>, <em>bounds=None</em>, <em>log_scale=False</em>, <em>fmin=None</em>, <em>fmax=None</em>, <em>cmap=&lt;matplotlib.colors.LinearSegmentedColormap object&gt;</em>, <em>optimum=[]</em>, <em>os=100</em>, <em>o_front=True</em>, <em>om='*'</em>, <em>oc='k'</em>, <em>inset=False</em>, <em>scale=0.1</em>, <em>filename=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Results.Results.animate" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt><strong>x_gene: string</strong></dt><dd><p>The name of the gene to be plotted on the x axis.</p>
+</dd>
+<dt><strong>y_gene: string</strong></dt><dd><p>The name of the gene to be plotted on the y axis.</p>
+</dd>
+<dt><strong>s: float</strong></dt><dd><p>Marker size</p>
+</dd>
+<dt><strong>alpha: float</strong></dt><dd><p>Marker transparency</p>
+</dd>
+<dt><strong>fps: int</strong></dt><dd><p>Frames per second</p>
+</dd>
+</dl>
+<p><strong>bounds:</strong></p>
+<dl>
+<dt><strong>log_scale: Boolean</strong></dt><dd><p>If true, plots the fitness scores on a log scale.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="results/animate.html#fitness-logscale"><span class="std std-ref">Fitness on a logscale</span></a></p>
+</div>
+</dd>
+<dt><strong>fmin: int or float</strong></dt><dd><p>Minimum fitness value shown on the colorbar.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="results/animate.html#fmin-fmax"><span class="std std-ref">fmin and fmax</span></a></p>
+</div>
+</dd>
+<dt><strong>fmax: int or float</strong></dt><dd><p>Maximum fitness value shown on the colorbar.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="results/animate.html#fmin-fmax"><span class="std std-ref">fmin and fmax</span></a></p>
+</div>
+</dd>
+<dt><strong>cmap: matplotlib colormap</strong></dt><dd><p>Colormap used for the animation.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="results/animate.html#colormap"><span class="std std-ref">Colormap</span></a></p>
+</div>
+</dd>
+<dt><strong>optimum: list</strong></dt><dd><p>Allows you to specify and mark optima on the animation.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="results/animate.html#optima"><span class="std std-ref">Marking the optimum</span></a></p>
+</div>
+</dd>
+<dt><strong>os: float</strong></dt><dd><p>Size of markers used to mark the optima.</p>
+</dd>
+</dl>
+<p><strong>o_front: boolean</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>if true, the markers used to mark the optima will be in the foreground.</p></li>
+<li><p>if false, the markers will be in the background.</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt><strong>om: char</strong></dt><dd><p>Style of markers used to mark the optima.</p>
+</dd>
+<dt><strong>oc: char</strong></dt><dd><p>Color of markers used to mark the optima.</p>
+</dd>
+</dl>
+<p><strong>inset: boolean or list</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>if false, there will be no inset</p></li>
+<li><p>if true, there will be an inset marked around the median individual of the final population</p></li>
+<li><p>if list, there will be an inset marked around the bounds [xmin, xmax ymin, ymax]</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="results/animate.html#inset"><span class="std std-ref">Inset</span></a></p>
+</div>
+</div></blockquote>
+<dl>
+<dt><strong>scale: float</strong></dt><dd><p>Only used for a default inset. Dictates the zoom of the inset.</p>
+</dd>
+<dt><strong>filename: string</strong></dt><dd><p>Name the gif will be saved to.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Specify the name without the <code class="docutils literal notranslate"><span class="pre">.gif</span></code> extension.</p>
+</div>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="Results.Results.fitness_global_max">
 <code class="descname">fitness_global_max</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Results.Results.fitness_global_max" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the maximum fitness across all individuals in the genetic algorithm</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="Results.Results.fitness_global_min">
 <code class="descname">fitness_global_min</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Results.Results.fitness_global_min" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the minimum fitness across all individuals in the genetic algorithm</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="Results.Results.fitness_maxs">
 <code class="descname">fitness_maxs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Results.Results.fitness_maxs" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns the maximum fitness in each generation</p>
+<dd><p>Returns a list with the maximum fitness in each generation</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Results.Results.fitness_mins">
 <code class="descname">fitness_mins</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Results.Results.fitness_mins" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns the minimum fitness in each generation</p>
+<dd><p>Returns a list with the minimum fitness in each generation</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="Results.Results.gene_global_max">
 <code class="descname">gene_global_max</code><span class="sig-paren">(</span><em>gene</em><span class="sig-paren">)</span><a class="headerlink" href="#Results.Results.gene_global_max" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the maximum value of the specified gene across all individuals in the genetic algorithm</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="Results.Results.gene_global_min">
 <code class="descname">gene_global_min</code><span class="sig-paren">(</span><em>gene</em><span class="sig-paren">)</span><a class="headerlink" href="#Results.Results.gene_global_min" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="Results.Results.gene_maxs">
-<code class="descname">gene_maxs</code><span class="sig-paren">(</span><em>gene</em><span class="sig-paren">)</span><a class="headerlink" href="#Results.Results.gene_maxs" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the minimum value of the specified gene across all individuals in the genetic algorithm</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="Results.Results.gene_median">
 <code class="descname">gene_median</code><span class="sig-paren">(</span><em>gene</em><span class="sig-paren">)</span><a class="headerlink" href="#Results.Results.gene_median" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="Results.Results.gene_mins">
-<code class="descname">gene_mins</code><span class="sig-paren">(</span><em>gene</em><span class="sig-paren">)</span><a class="headerlink" href="#Results.Results.gene_mins" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="Results.Results.plot_3d">
-<code class="descname">plot_3d</code><span class="sig-paren">(</span><em>x_gene</em>, <em>y_gene</em>, <em>z_gene</em><span class="sig-paren">)</span><a class="headerlink" href="#Results.Results.plot_3d" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="Results.Results.plot_diversity">
-<code class="descname">plot_diversity</code><span class="sig-paren">(</span><em>gene=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Results.Results.plot_diversity" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns a list of the median value of the specified gene in each generation</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="Results.Results.plot_fitness">
 <code class="descname">plot_fitness</code><span class="sig-paren">(</span><em>fname=None</em><span class="sig-paren">)</span><a class="headerlink" href="#Results.Results.plot_fitness" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Plots the minimum fitness at each generation.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="demos/sphere.html#sphere-results"><span class="std std-ref">sphere demo</span></a></p>
+</div>
+</dd></dl>
 
 <dl class="method">
 <dt id="Results.Results.print_best">
 <code class="descname">print_best</code><span class="sig-paren">(</span><em>minimise=True</em><span class="sig-paren">)</span><a class="headerlink" href="#Results.Results.print_best" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Prints the genes and the fitness score of the best individual.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="demos/sphere.html#sphere-results"><span class="std std-ref">sphere demo</span></a></p>
+</div>
+</dd></dl>
 
 </dd></dl>
 
+<p><a class="reference internal" href="index.html#home"><span class="std std-ref">Return Home</span></a></p>
 </div>
 
 

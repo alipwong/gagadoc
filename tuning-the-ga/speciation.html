@@ -15,6 +15,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Loading results" href="../results/load-results.html" />
     <link rel="prev" title="Cloning" href="cloning.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -26,6 +27,9 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="../results/load-results.html" title="Loading results"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="cloning.html" title="Cloning"
              accesskey="P">previous</a> |</li>
@@ -39,11 +43,11 @@
           <div class="body" role="main">
             
   <div class="section" id="speciation">
-<h1>Speciation<a class="headerlink" href="#speciation" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>Speciation<a class="headerlink" href="#speciation" title="Permalink to this headline">¶</a></h1>
 <p>Sometimes your search space may have multiple optimums. This can be tricky for the genetic algorithm as it may find a local optimum rather than the global optimum, and its performance will be dependant on the initial conditions. Speciation can be used to explore multiple optimas simultaneously. In speciation, individuals reproduce with individuals close to them in the search space. Over time, this should lead to distinct populations that explore each of the optimas.</p>
 <p><code class="docutils literal notranslate"><span class="pre">gaga</span></code> offers a very crude implementation of speciation. A the <span class="math notranslate nohighlight">\(i^{th}\)</span> generation, the individuals in the gene pool are sorted by the <span class="math notranslate nohighlight">\(i%n^{th}\)</span> gene where the are <span class="math notranslate nohighlight">\(n\)</span> genes.</p>
 <div class="section" id="himmelblau-s-function">
-<h2>Himmelblau's function<a class="headerlink" href="#himmelblau-s-function" title="Permalink to this headline">¶</a></h2>
+<span id="himmelblau"></span><h2>Himmelblau's function<a class="headerlink" href="#himmelblau-s-function" title="Permalink to this headline">¶</a></h2>
 <a class="reference external image-reference" href="https://en.wikipedia.org/wiki/Himmelblau%27s_function"><img alt="../images/Himmelblau_function.png" class="align-center" src="../images/Himmelblau_function.png" style="width: 45%;" /></a>
 <p>Speciation is demonstrated on the Himmelbalu function.</p>
 <div class="math notranslate nohighlight">
@@ -142,6 +146,7 @@
 <p class="admonition-title">Note</p>
 <p>It can be tricky to get the hyperparameters right so that all of the optimums are explored. In general, you also need a larger population so that each subpopulation is large enough, which can be computationally expensive. It may be easier just to tune your genetic algorithm to find local optimums, then run it a number of times with different initial conditions i.e. change the seed).</p>
 </div>
+<p><a class="reference internal" href="../index.html#home"><span class="std std-ref">Return Home</span></a></p>
 </div>
 </div>
 </div>
@@ -167,6 +172,9 @@
   <h4>Previous topic</h4>
   <p class="topless"><a href="cloning.html"
                         title="previous chapter">Cloning</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../results/load-results.html"
+                        title="next chapter">Loading results</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -197,6 +205,9 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="../results/load-results.html" title="Loading results"
+             >next</a> |</li>
         <li class="right" >
           <a href="cloning.html" title="Cloning"
              >previous</a> |</li>

@@ -36,7 +36,6 @@ Classes
    class-individual
    class-results
 
-
 Tips for tuning your genetic algorithm
 ======================================
 
@@ -47,6 +46,15 @@ Tips for tuning your genetic algorithm
    tuning-the-ga/selection
    tuning-the-ga/cloning
    tuning-the-ga/speciation
+
+Results
+=======
+
+.. toctree::
+   :maxdepth: 1
+
+   results/load-results
+   results/animate
 
 Indices and tables
 ==================

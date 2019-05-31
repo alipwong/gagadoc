@@ -75,3 +75,5 @@ Finally, the following will generate an animation. We also specify the analytica
 .. image:: ../static/x_y_animation-pycharm.gif
     :align: center
     :width: 45%
+
+:ref:`Return Home <home>`

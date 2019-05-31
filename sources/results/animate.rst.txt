@@ -1,0 +1,168 @@
+Visualising the behaviour of your genetic algorithm
+===================================================
+
+You can visualise the behaviour of your genetic algorithm using ``animate``. Here is a quick example where we use the genetic algorithm to fit Himmelblau's function (See :ref:`here <Himmelblau>` for more on Himmelblau's function).
+
+.. code-block:: python
+
+    sim = ga.ga(genes, 
+            evaluate,
+            population_size = 200,
+            epoch = 50,
+            mutate_crossover = True,
+            speciate = True,
+            mutate = 0.4,
+            sigma = 0.5)
+    sim.run_simulation(seed = 1)
+
+Default
+-------
+
+You can see the progression of the population in the *x* and *y* genes with the default settings which will create ``x_y_animation.gif`` in your results folder.
+
+.. code-block:: python
+
+    anim = sim.results.animate('x', 'y')
+
+.. image:: ../static/animate/default.gif
+    :align: center
+    :width: 45%
+
+.. _fmin-fmax:
+
+
+fmin and fmax
+-------------
+
+In the default animation, you can see that the colorbar goes up to a fitness score of 600, although a majority of the individuals have a fitness score below 200. You can use ``fmax`` and ``fmin`` to adjust the range of the colorbar. 
+
+.. code-block:: python
+
+    anim = sim.results.animate('x', 'y', fmax = 100)
+
+.. image:: ../static/animate/fmax.gif
+    :align: center
+    :width: 45%
+
+.. _optima:
+
+Marking the optimum
+-------------------
+
+You can mark a single optimum on the animation by passing in a list with an *x* and *y* coordinate. You can mark multiple optimums by passing in a list with a list of *x* and a list of corresponding *y* coordinates.
+
+.. code-block:: python
+
+    # single optimum (Left)
+    anim = sim.results.animate('x', 'y', 
+                           optimum = [3,2],
+                           oc = 'w',
+                           fmax = 100)
+
+    # multiple optimum (right)
+    anim = sim.results.animate('x', 'y', 
+                           optimum = [[3, -2.805118, -3.779310, 3.584428], [2, 3.131312, -3.283186, -1.848126]],
+                           oc = 'w',
+                           fmax = 100)
+
+================================================  ==================================================
+.. image:: ../static/animate/single-optimum.gif  .. image:: ../static/animate/multiple-optimum.gif
+================================================  ==================================================
+
+.. _inset:
+
+Inset
+-----
+
+By default, an inset will be marked around the median individual of the final population. If there is a single optimum, this is where the population will have converged to.
+
+.. code-block:: python
+
+    anim = sim.results.animate('x', 'y', 
+                                optimum = [[3, -2.805118, -3.779310, 3.584428], [2, 3.131312, -3.283186, -1.848126]],
+                                oc = 'w',
+                                fmax = 100,
+                                inset = True)
+
+.. image:: ../static/animate/default_inset.gif
+    :align: center
+    :width: 75%
+
+You can also specify the bounds of the inset with ``inset = [xmin, xmax, ymin, ymax]``
+
+.. code-block:: python
+
+    anim = sim.results.animate('x', 'y', 
+                                optimum = [[3, -2.805118, -3.779310, 3.584428], [2, 3.131312, -3.283186, -1.848126]],
+                                oc = 'w',
+                                fmax = 100,
+                                inset = [-3.5, -2, 2.3, 3.8])
+
+.. image:: ../static/animate/specified_inset.gif
+    :align: center
+    :width: 75%
+
+.. _fitness_logscale:
+
+Fitness on a logscale
+----------------------
+
+You can put the fitness on a logscale by setting ``log_scale = True``.
+
+.. code-block:: python
+
+    anim = sim.results.animate('x', 'y', 
+                           optimum = [[3, -2.805118, -3.779310, 3.584428], [2, 3.131312, -3.283186, -1.848126]],
+                           oc = 'w',
+                           inset = True,
+                           log_scale = True,
+                           fmin = 1)
+
+.. image:: ../static/animate/logscale.gif
+    :align: center
+    :width: 75%
+
+.. warning:: 
+
+    There is nothing to handle cases where the fitness is 0 and the log is undefined.
+
+
+
+Transparency
+------------
+
+Increasing the transparency can help you to visualise which areas your population spends the most time exploring.
+
+.. code-block:: python
+
+    anim = sim.results.animate('x', 'y', 
+                                optimum = [[3, -2.805118, -3.779310, 3.584428], [2, 3.131312, -3.283186, -1.848126]],
+                                oc = 'w',
+                                fmax = 100,
+                                alpha = 0.05,
+                                s = 10)
+
+.. image:: ../static/animate/alpha.gif
+    :align: center
+    :width: 45%
+
+.. _colormap:
+
+Colormap
+--------
+
+You can specify a colormap.
+
+.. code-block:: python
+
+    from matplotlib import cm
+
+    anim = sim.results.animate('x', 'y', 
+                                cmap = cm.viridis_r,
+                                fmax = 100)
+
+.. image:: ../static/animate/cmap.gif
+    :align: center
+    :width: 45%
+
+:ref:`Return Home <home>`

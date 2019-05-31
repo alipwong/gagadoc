@@ -42,6 +42,11 @@ We run the simulation by passing it the genes and the evaluate function we defin
                 population_size = 50)
     sim.run_simulation()
 
+.. _sphere-results:
+
+Results
+-------
+
 The following will display the gene values and the fitness score of the individual with the best fitness.
 
 .. code-block:: python

@@ -1,9 +1,13 @@
+.. _speciation:
+
 Speciation
 ==========
 
 Sometimes your search space may have multiple optimums. This can be tricky for the genetic algorithm as it may find a local optimum rather than the global optimum, and its performance will be dependant on the initial conditions. Speciation can be used to explore multiple optimas simultaneously. In speciation, individuals reproduce with individuals close to them in the search space. Over time, this should lead to distinct populations that explore each of the optimas. 
 
 ``gaga`` offers a very crude implementation of speciation. A the :math:`i^{th}` generation, the individuals in the gene pool are sorted by the :math:`i%n^{th}` gene where the are :math:`n` genes. 
+
+.. _Himmelblau:
 
 Himmelblau's function
 ---------------------
@@ -81,3 +85,5 @@ The genetic algorithm is able to explore multiple optimums by itself, ``speciate
 .. note::
 
     It can be tricky to get the hyperparameters right so that all of the optimums are explored. In general, you also need a larger population so that each subpopulation is large enough, which can be computationally expensive. It may be easier just to tune your genetic algorithm to find local optimums, then run it a number of times with different initial conditions i.e. change the seed).
+
+:ref:`Return Home <home>`

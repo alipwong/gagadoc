@@ -3,4 +3,5 @@ results class
 
 .. automodule:: Results
     :members:
-    :undoc-members:
+
+:ref:`Return Home <home>`
