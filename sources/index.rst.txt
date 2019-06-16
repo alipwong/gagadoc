@@ -8,6 +8,8 @@
 Welcome to gaga's documentation!
 ================================
 
+.. note:: You'll notice there are a lot of animations. To get them all to sync up, wait for the page to load then navigate back to the home page. When you open the page again, the animations should be in sync.
+
 Get started!
 ------------
 
@@ -55,6 +57,19 @@ Results
 
    results/load-results
    results/animate
+
+Fitting MCFOST models to VAMPIRES data
+======================================
+
+.. note:: If you don't know what this is, then this section isn't relevant to you
+
+.. toctree::
+   :maxdepth: 1
+
+   vamp/setup
+   vamp/ga-vamp
+   vamp/vamp-results
+
 
 Indices and tables
 ==================

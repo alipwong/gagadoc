@@ -268,7 +268,7 @@ var Search = {
           listItem.slideDown(5, function() {
             displayNextItem();
           });
-        } else if (DOCUMENTATION_OPTIONS.HAS_SOURCE) {
+        } else if (DOCUMENTATION_OPTIONS.HASsource) {
           $.ajax({url: DOCUMENTATION_OPTIONS.URL_ROOT + item[0] + DOCUMENTATION_OPTIONS.FILE_SUFFIX,
                   dataType: "text",
                   complete: function(jqxhr, textstatus) {

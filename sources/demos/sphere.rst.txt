@@ -1,5 +1,7 @@
+.. _sphere:
+
 The sphere function
--------------------
+===================
 .. image:: ../static/Sphere_function.jpg
     :align: center
     :width: 45%

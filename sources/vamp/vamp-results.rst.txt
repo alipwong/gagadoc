@@ -1,0 +1,60 @@
+Additional result functionalities
+=================================
+
+Additional plotting functionalities have been added to the results class. These are for convenience and are not necessarily robust. A demo jupyter notebook with all the code can be found here_.
+
+
+.. _here: https://github.com/awon8465/VAMPIRES-MCFOST-GA/tree/master/make-measurements/gaga-demo-results
+
+.. code-block:: python
+
+    import bz2
+    import pickle
+    import numpy as np
+    import sys
+    import VAMPIRES_data
+
+Load the vampires data
+----------------------
+
+.. code-block:: python
+
+    VAMP_path = "../
+    data_RLeo_03_20170313_750-50_18holeNudged_0_0.idlvar"
+    VAMP_data_info = "cubeinfoMar2017.idlvar"
+
+.. code-block:: python
+
+    with bz2.open("./results_obj", "rb") as f:
+        results = pickle.load(f)
+
+.. code-block:: python
+
+    VAMP_data = VAMPIRES_data.VAMPIRES_data(VAMP_path + VAMP_data, VAMP_path + VAMP_data_info)
+    VAMP_data.vhvv -= np.mean(VAMP_data.vhvv) - 1
+    VAMP_data.vhvvu -= np.mean(VAMP_data.vhvvu) - 1
+
+Visualise the fit to the visibilities
+-------------------------------------
+
+.. code-block:: python
+
+    results.vis(VAMP_data, Stokes = 'Q', fps = 15)
+    results.vis(VAMP_data, Stokes = 'U', fps = 15)
+
+=====================================================  =====================================================
+.. image:: ../static/vamp-results/visibilities_Q.gif  .. image:: ../static/vamp-results/visibilities_U.gif
+=====================================================  =====================================================
+
+Correlation plot
+----------------
+You can show the Q and U fits separately by specifying ``Stokes = 'Q'`` of ``Stokes = 'U'``.
+
+.. code-block:: python
+
+    results.correlate(VAMP_data, fps = 5)
+
+.. image:: ../static/vamp-results/Correlation_QU.gif
+    :align: center
+    :width: 45%
+

@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="Python">
+  <head>
+    <meta charset="utf-8" />
+    <title>Additional result functionalities &#8212; gaga 0.1.6 documentation</title>
+    <link rel="stylesheet" href="../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <script type="text/javascript" src="../static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Setting up the GA" href="ga-vamp.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ga-vamp.html" title="Setting up the GA"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.6 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="additional-result-functionalities">
+<h1>Additional result functionalities<a class="headerlink" href="#additional-result-functionalities" title="Permalink to this headline">¶</a></h1>
+<p>Additional plotting functionalities have been added to the results class. These are for convenience and are not necessarily robust. A demo jupyter notebook with all the code can be found <a class="reference external" href="https://github.com/awon8465/VAMPIRES-MCFOST-GA/tree/master/make-measurements/gaga-demo-results">here</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bz2</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">VAMPIRES_data</span>
+</pre></div>
+</div>
+<div class="section" id="load-the-vampires-data">
+<h2>Load the vampires data<a class="headerlink" href="#load-the-vampires-data" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">VAMP_path</span> <span class="o">=</span> <span class="s2">&quot;../</span>
+<span class="n">data_RLeo_03_20170313_750</span><span class="o">-</span><span class="mi">50</span><span class="n">_18holeNudged_0_0</span><span class="o">.</span><span class="n">idlvar</span><span class="s2">&quot;</span>
+<span class="n">VAMP_data_info</span> <span class="o">=</span> <span class="s2">&quot;cubeinfoMar2017.idlvar&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">bz2</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;./results_obj&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">VAMP_data</span> <span class="o">=</span> <span class="n">VAMPIRES_data</span><span class="o">.</span><span class="n">VAMPIRES_data</span><span class="p">(</span><span class="n">VAMP_path</span> <span class="o">+</span> <span class="n">VAMP_data</span><span class="p">,</span> <span class="n">VAMP_path</span> <span class="o">+</span> <span class="n">VAMP_data_info</span><span class="p">)</span>
+<span class="n">VAMP_data</span><span class="o">.</span><span class="n">vhvv</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">VAMP_data</span><span class="o">.</span><span class="n">vhvv</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">VAMP_data</span><span class="o">.</span><span class="n">vhvvu</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">VAMP_data</span><span class="o">.</span><span class="n">vhvvu</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="visualise-the-fit-to-the-visibilities">
+<h2>Visualise the fit to the visibilities<a class="headerlink" href="#visualise-the-fit-to-the-visibilities" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">vis</span><span class="p">(</span><span class="n">VAMP_data</span><span class="p">,</span> <span class="n">Stokes</span> <span class="o">=</span> <span class="s1">&#39;Q&#39;</span><span class="p">,</span> <span class="n">fps</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">results</span><span class="o">.</span><span class="n">vis</span><span class="p">(</span><span class="n">VAMP_data</span><span class="p">,</span> <span class="n">Stokes</span> <span class="o">=</span> <span class="s1">&#39;U&#39;</span><span class="p">,</span> <span class="n">fps</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><img alt="../images/visibilities_Q.gif" src="../images/visibilities_Q.gif" />
+</td>
+<td><img alt="../images/visibilities_U.gif" src="../images/visibilities_U.gif" />
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="correlation-plot">
+<h2>Correlation plot<a class="headerlink" href="#correlation-plot" title="Permalink to this headline">¶</a></h2>
+<p>You can show the Q and U fits separately by specifying <code class="docutils literal notranslate"><span class="pre">Stokes</span> <span class="pre">=</span> <span class="pre">'Q'</span></code> of <code class="docutils literal notranslate"><span class="pre">Stokes</span> <span class="pre">=</span> <span class="pre">'U'</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">VAMP_data</span><span class="p">,</span> <span class="n">fps</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../images/Correlation_QU.gif"><img alt="../images/Correlation_QU.gif" class="align-center" src="../images/Correlation_QU.gif" style="width: 45%;" /></a>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Additional result functionalities</a><ul>
+<li><a class="reference internal" href="#load-the-vampires-data">Load the vampires data</a></li>
+<li><a class="reference internal" href="#visualise-the-fit-to-the-visibilities">Visualise the fit to the visibilities</a></li>
+<li><a class="reference internal" href="#correlation-plot">Correlation plot</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ga-vamp.html"
+                        title="previous chapter">Setting up the GA</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../sources/vamp/vamp-results.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ga-vamp.html" title="Setting up the GA"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.6 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Alison Wong.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

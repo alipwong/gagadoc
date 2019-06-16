@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="Python">
+  <head>
+    <meta charset="utf-8" />
+    <title>Setting up the GA &#8212; gaga 0.1.6 documentation</title>
+    <link rel="stylesheet" href="../static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../static/documentation_options.js"></script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <script type="text/javascript" src="../static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Additional result functionalities" href="vamp-results.html" />
+    <link rel="prev" title="Requirements" href="setup.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="vamp-results.html" title="Additional result functionalities"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="setup.html" title="Requirements"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.6 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="setting-up-the-ga">
+<h1>Setting up the GA<a class="headerlink" href="#setting-up-the-ga" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are a few things you may want to do first. If you're not already familiar with how to run a simple genetic algorithm, it is recommended you look at the <a class="reference internal" href="../demos/sphere.html#sphere"><span class="std std-ref">sphere function demonstration</span></a>.</p>
+<p>If you're not familiar with using my <code class="docutils literal notranslate"><span class="pre">star.py</span></code> class to take interferometric measurements from mcfost models, play around with the <code class="docutils literal notranslate"><span class="pre">DEMO_make_star.py</span></code> script which you can download from <a class="reference external" href="https://github.com/awon8465/VAMPIRES-MCFOST-GA/tree/master/make-measurements-code">here</a>. For further reading, see the accompanying manual <code class="docutils literal notranslate"><span class="pre">making_measurements.pdf</span></code>.</p>
+</div>
+<p>It is easiest to write your genetic algorithm script in the same directory as all the supporting scripts so the imports are as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gaga</span> <span class="kn">as</span> <span class="nn">ga</span>
+<span class="kn">import</span> <span class="nn">VAMPIRES_data</span>
+<span class="kn">import</span> <span class="nn">star</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+<p>Next, define the genes and their ranges. The gene names must match the parameter names in <code class="docutils literal notranslate"><span class="pre">default_parameters_star.py</span></code>. For a description of the parameters, see the mcfost documentation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gene_definition</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;dust_mass&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mf">1e-7</span><span class="p">,</span> <span class="mf">6e-7</span><span class="p">),</span>
+                <span class="s2">&quot;inner_radius&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+                <span class="s2">&quot;radius&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">800</span><span class="p">),</span>
+                <span class="s2">&quot;outer_radius&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">)}</span>
+</pre></div>
+</div>
+<div class="section" id="the-evaluate-function">
+<h2>The evaluate function<a class="headerlink" href="#the-evaluate-function" title="Permalink to this headline">¶</a></h2>
+<p>The evaluate function is essentially the same as what is in <code class="docutils literal notranslate"><span class="pre">DEMO_make_star.py</span></code>. We need to generate an mcfost model for our gene set and then calculated the reduced <span class="math notranslate nohighlight">\(\chi^2\)</span> error to use as our fitness score.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">individual</span><span class="p">):</span>
+
+    <span class="n">WAVELENGTH</span> <span class="o">=</span> <span class="mf">0.75</span> <span class="c1"># wavelength of observation in microns</span>
+
+    <span class="c1"># location where intermediate mcfost files are created</span>
+    <span class="n">MCFOST_path</span> <span class="o">=</span> <span class="s2">&quot;../mcfost-workspace/&quot;</span>
+
+    <span class="c1"># name of the python file containing the Default_parameters class</span>
+    <span class="n">default_params</span> <span class="o">=</span> <span class="s2">&quot;default_parameters_star&quot;</span>
+
+    <span class="c1"># path to the VAMPIRES data</span>
+    <span class="n">VAMP_path</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">VAMP_data</span> <span class="o">=</span> <span class="s2">&quot;diffdata_RLeo_03_20170313_750-50_18holeNudged_0_0.idlvar&quot;</span>
+    <span class="n">VAMP_data_info</span> <span class="o">=</span> <span class="s2">&quot;cubeinfoMar2017.idlvar&quot;</span>
+
+    <span class="n">VAMP_data</span> <span class="o">=</span> <span class="n">VAMPIRES_data</span><span class="o">.</span><span class="n">VAMPIRES_data</span><span class="p">(</span><span class="n">VAMP_path</span> <span class="o">+</span> <span class="n">VAMP_data</span><span class="p">,</span> <span class="n">VAMP_path</span> <span class="o">+</span> <span class="n">VAMP_data_info</span><span class="p">)</span>
+
+    <span class="c1"># remove bias from the observed data i.e. move the average to 1</span>
+    <span class="n">VAMP_data</span><span class="o">.</span><span class="n">vhvv</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">VAMP_data</span><span class="o">.</span><span class="n">vhvv</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">VAMP_data</span><span class="o">.</span><span class="n">vhvvu</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">VAMP_data</span><span class="o">.</span><span class="n">vhvvu</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="c1"># unpack the genes and use them to define the parameters for the model</span>
+    <span class="n">dm</span> <span class="o">=</span> <span class="n">individual</span><span class="o">.</span><span class="n">genes</span><span class="p">[</span><span class="s2">&quot;dust_mass&quot;</span><span class="p">]</span>
+    <span class="n">Rin</span> <span class="o">=</span> <span class="n">individual</span><span class="o">.</span><span class="n">genes</span><span class="p">[</span><span class="s2">&quot;inner_radius&quot;</span><span class="p">]</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">individual</span><span class="o">.</span><span class="n">genes</span><span class="p">[</span><span class="s2">&quot;radius&quot;</span><span class="p">]</span>
+    <span class="n">Rout</span> <span class="o">=</span> <span class="n">individual</span><span class="o">.</span><span class="n">genes</span><span class="p">[</span><span class="s2">&quot;outer_radius&quot;</span><span class="p">]</span>
+
+    <span class="n">free_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;dust_mass&quot;</span><span class="p">:</span> <span class="n">dm</span><span class="p">,</span> <span class="s2">&quot;Rin&quot;</span><span class="p">:</span> <span class="n">Rin</span><span class="p">,</span> <span class="s2">&quot;radius&quot;</span><span class="p">:</span><span class="n">r</span><span class="p">,</span> <span class="s2">&quot;Rout&quot;</span><span class="p">:</span><span class="n">Rout</span><span class="p">}</span>
+
+    <span class="c1"># run mcfost</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">star</span><span class="o">.</span><span class="n">Star</span><span class="p">(</span><span class="n">free_params</span><span class="p">,</span> <span class="n">default_params</span><span class="p">,</span> <span class="n">WAVELENGTH</span><span class="p">,</span> <span class="n">MCFOST_path</span><span class="p">,</span> <span class="n">VAMP_data</span><span class="p">,</span> <span class="n">load</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="c1"># calculate the reduced chi^2 error and use it as the fitness score</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">calculate_reduced_chi2error</span><span class="p">()</span>
+    <span class="n">individual</span><span class="o">.</span><span class="n">fitness_score</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">reduced_chi2err</span>
+
+    <span class="c1"># Optional: storing some useful data</span>
+    <span class="n">individual</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;data_Q&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">data_Q</span>
+    <span class="n">individual</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;data_U&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">data_U</span>
+    <span class="n">individual</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;reduced_chi2err_Q&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">reduced_chi2err_Q</span>
+    <span class="n">individual</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;reduced_chi2err_U&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">reduced_chi2err_U</span>
+    <span class="n">individual</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;reduced_chi2err&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">reduced_chi2err</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="now-you-re-ready-to-run-the-ga">
+<h2>Now you're ready to run the GA<a class="headerlink" href="#now-you-re-ready-to-run-the-ga" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">ga</span><span class="o">.</span><span class="n">ga</span><span class="p">(</span><span class="n">gene_definition</span><span class="p">,</span> <span class="n">evaluate</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Setting up the GA</a><ul>
+<li><a class="reference internal" href="#the-evaluate-function">The evaluate function</a></li>
+<li><a class="reference internal" href="#now-you-re-ready-to-run-the-ga">Now you're ready to run the GA</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="setup.html"
+                        title="previous chapter">Requirements</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="vamp-results.html"
+                        title="next chapter">Additional result functionalities</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../sources/vamp/ga-vamp.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="vamp-results.html" title="Additional result functionalities"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="setup.html" title="Requirements"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">gaga 0.1.6 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Alison Wong.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

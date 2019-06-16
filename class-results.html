@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="Python">
   <head>
     <meta charset="utf-8" />
-    <title>results class &#8212; gaga 0.1.1 documentation</title>
+    <title>results class &#8212; gaga 0.1.6 documentation</title>
     <link rel="stylesheet" href="static/nature.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
@@ -33,7 +33,7 @@
         <li class="right" >
           <a href="class-individual.html" title="individual class"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">gaga 0.1.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">gaga 0.1.6 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -56,49 +56,49 @@
 </dd>
 <dt><strong>y_gene: string</strong></dt><dd><p>The name of the gene to be plotted on the y axis.</p>
 </dd>
-<dt><strong>s: float</strong></dt><dd><p>Marker size</p>
+<dt><strong>s: int, (default = 5)</strong></dt><dd><p>Marker size</p>
 </dd>
-<dt><strong>alpha: float</strong></dt><dd><p>Marker transparency</p>
+<dt><strong>alpha: float, (default = 0.5)</strong></dt><dd><p>Marker transparency</p>
 </dd>
-<dt><strong>fps: int</strong></dt><dd><p>Frames per second</p>
+<dt><strong>fps: int, (default = 30)</strong></dt><dd><p>Frames per second</p>
 </dd>
 </dl>
-<p><strong>bounds:</strong></p>
+<p><strong>bounds: (default = None)</strong></p>
 <dl>
-<dt><strong>log_scale: Boolean</strong></dt><dd><p>If true, plots the fitness scores on a log scale.</p>
+<dt><strong>log_scale: Boolean, (default = False)</strong></dt><dd><p>If true, plots the fitness scores on a log scale.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="results/animate.html#fitness-logscale"><span class="std std-ref">Fitness on a logscale</span></a></p>
 </div>
 </dd>
-<dt><strong>fmin: int or float</strong></dt><dd><p>Minimum fitness value shown on the colorbar.</p>
+<dt><strong>fmin: int or float, (default = None)</strong></dt><dd><p>Minimum fitness value shown on the colorbar.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="results/animate.html#fmin-fmax"><span class="std std-ref">fmin and fmax</span></a></p>
 </div>
 </dd>
-<dt><strong>fmax: int or float</strong></dt><dd><p>Maximum fitness value shown on the colorbar.</p>
+<dt><strong>fmax: int or float, (default = None)</strong></dt><dd><p>Maximum fitness value shown on the colorbar.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="results/animate.html#fmin-fmax"><span class="std std-ref">fmin and fmax</span></a></p>
 </div>
 </dd>
-<dt><strong>cmap: matplotlib colormap</strong></dt><dd><p>Colormap used for the animation.</p>
+<dt><strong>cmap: matplotlib colormap, (default = cm.rainbow)</strong></dt><dd><p>Colormap used for the animation.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="results/animate.html#colormap"><span class="std std-ref">Colormap</span></a></p>
 </div>
 </dd>
-<dt><strong>optimum: list</strong></dt><dd><p>Allows you to specify and mark optima on the animation.</p>
+<dt><strong>optimum: list, (default = [])</strong></dt><dd><p>Allows you to specify and mark optima on the animation.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="results/animate.html#optima"><span class="std std-ref">Marking the optimum</span></a></p>
 </div>
 </dd>
-<dt><strong>os: float</strong></dt><dd><p>Size of markers used to mark the optima.</p>
+<dt><strong>os: float, (default = 100)</strong></dt><dd><p>Size of markers used to mark the optima.</p>
 </dd>
 </dl>
-<p><strong>o_front: boolean</strong></p>
+<p><strong>o_front: boolean, (default = True)</strong></p>
 <blockquote>
 <div><ul class="simple">
 <li><p>if true, the markers used to mark the optima will be in the foreground.</p></li>
@@ -106,12 +106,12 @@
 </ul>
 </div></blockquote>
 <dl class="simple">
-<dt><strong>om: char</strong></dt><dd><p>Style of markers used to mark the optima.</p>
+<dt><strong>om: char, (default = '*')</strong></dt><dd><p>Style of markers used to mark the optima.</p>
 </dd>
-<dt><strong>oc: char</strong></dt><dd><p>Color of markers used to mark the optima.</p>
+<dt><strong>oc: char, (default = 'k')</strong></dt><dd><p>Color of markers used to mark the optima.</p>
 </dd>
 </dl>
-<p><strong>inset: boolean or list</strong></p>
+<p><strong>inset: boolean or list, (default = False)</strong></p>
 <blockquote>
 <div><ul class="simple">
 <li><p>if false, there will be no inset</p></li>
@@ -124,9 +124,9 @@
 </div>
 </div></blockquote>
 <dl>
-<dt><strong>scale: float</strong></dt><dd><p>Only used for a default inset. Dictates the zoom of the inset.</p>
+<dt><strong>scale: float, (default = 0.1)</strong></dt><dd><p>Only used for a default inset. Dictates the zoom of the inset.</p>
 </dd>
-<dt><strong>filename: string</strong></dt><dd><p>Name the gif will be saved to.</p>
+<dt><strong>filename: string, (default = None)</strong></dt><dd><p>Name the gif will be saved to. By default it is saved as <code class="docutils literal notranslate"><span class="pre">&lt;x_gene&gt;_&lt;y_gene&gt;_animation.gif</span></code></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Specify the name without the <code class="docutils literal notranslate"><span class="pre">.gif</span></code> extension.</p>
@@ -250,7 +250,7 @@
         <li class="right" >
           <a href="class-individual.html" title="individual class"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">gaga 0.1.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">gaga 0.1.6 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
